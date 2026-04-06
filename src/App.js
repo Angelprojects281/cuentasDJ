@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "./styles/App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "./context/ThemeContext";
+
+import Inicio from "./inicio/inicio";
+import InicioSesion from "./generales/usuarioContraseña";
+import CambiarContraseña from "./generales/cambiarContraseña";
+import Buscar from "./generales/busqueda";
+import Confirmacion from "./confirmacion/confirmacion";
+import PrincipalRegular from "./userRegular/principalRegular";
+import NuevoRegistro from "./userRegular/nuevoRegistro";
+import PrincipalAdmin from "./userAdmin/principalAdmin";
+import AdminUsuarios from "./userAdmin/adminUsuarios";
+import NuevoUsuario from "./userAdmin/nuevoUsuario";
+import AdminRegistros from "./userAdmin/adminRegistros";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Inicio />} />
+          <Route path="/inicioSesion" element={<InicioSesion />} />
+          <Route path="/cambiarContraseña" element={<CambiarContraseña />} />
+          <Route path="/buscar" element={<Buscar />} />
+          <Route path="/confirmacion" element={<Confirmacion />} />
+          <Route path="/principalRegular" element={<PrincipalRegular />} />
+          <Route path="/nuevoRegistro" element={<NuevoRegistro />} />
+          <Route path="/principalAdmin" element={<PrincipalAdmin />} />
+          <Route path="/adminUsuarios" element={<AdminUsuarios />} />
+          <Route path="/nuevoUsuario" element={<NuevoUsuario />} />
+          <Route path="/adminRegistros" element={<AdminRegistros />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

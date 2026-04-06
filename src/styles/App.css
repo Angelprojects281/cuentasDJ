@@ -1,0 +1,230 @@
+:root {
+  --body_color: #fff5f7;
+  --container_color: #f0a7c2;
+  --header1_color: linear-gradient(360deg, #f8c8dc, #ffd6a5);
+  --header2_color: #f8c8dc;
+  --section_color: #f8c8dc;
+  --footer_color: linear-gradient(360deg, #ffd6a5, #f8c8dc);
+  --input_select: #d3d3d3;
+  --focus: 2px solid #4cc4e5;
+  --volver: linear-gradient(45deg, #908d8d, #7cbfd2);
+  --principales: linear-gradient(45deg, #4cc4e5, #2d78d3);
+  --secundarios: linear-gradient(45deg, #ef3268, #eb3298);
+  --listas_border: 1px solid #1b1919;
+  --text_color: #281cd4;
+  --filter_img: brightness(0) invert(0) opacity(1);
+  --tema_color: #000000;
+}
+
+:root.dark {
+  --body_color: #000000;
+  --container_color: #101530;
+  --header1_color: linear-gradient(360deg, #3b4252, #2e3440);
+  --header2_color: #3b4252;
+  --section_color: #3b4252;
+  --footer_color: linear-gradient(360deg, #2e3440, #3b4252);
+  --input_select: #3a3838;
+  --focus: 2px solid #000000;
+  --volver: linear-gradient(45deg, #322929, #60529b);
+  --principales: linear-gradient(45deg, #0e0f15, #0a2a52);
+  --secundarios: linear-gradient(45deg, #302427, #790746);
+  --listas_border: 1px solid #000000;
+  --text_color: hsl(252, 91%, 17%);
+  --filter_img: brightness(0) invert(1) opacity(0.8);
+  --tema_color: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--body_color);
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0px 0px 20px 0px;
+}
+
+#container {
+  max-width: 800px;
+  margin: 5px auto;
+  padding: 7px;
+  border-radius: 20px;
+  background: var(--container_color);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+#header1 {
+  background: var(--header1_color);
+  height: 30px;
+  border-radius: 20px 20px 0px 0px;
+}
+
+#header2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--header2_color);
+  padding: 20px;
+  text-align: center;
+}
+
+#header2 img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  filter: var(--filter_img);
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  gap: 25px;
+  background: var(--section_color);
+  min-height: 50vh;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+footer {
+  background: var(--footer_color);
+  text-align: center;
+  text-decoration: underline;
+  padding: 15px;
+  border-radius: 0px 0px 20px 20px;
+}
+
+#lema {
+  margin: 0;
+  font-style: italic;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+
+input,
+select {
+  background-color: var(--input_select);
+  border-radius: 10px;
+  border: none;
+  height: auto;
+  width: 80%;
+  max-width: 300px;
+  margin: 7px;
+  font-size: 18px;
+  padding: 10px;
+  outline: none;
+  box-shadow: 0px 2px 5px #000000;
+  transition: outline 0.2s ease;
+}
+
+input:focus,
+select:focus {
+  outline: var(--focus);
+}
+
+#volver {
+  border-radius: 50px;
+  background: var(--volver);
+  margin: 10px;
+  font-size: 13px;
+  text-transform: uppercase;
+  box-shadow: 0px 2px 5px #000000;
+  color: white;
+}
+
+button:not(.tema) {
+  border-radius: 20px;
+  width: fit-content;
+  max-width: 300px;
+  font-size: 16px;
+  text-transform: capitalize;
+  margin: 5px auto;
+  padding: 15px;
+  box-shadow: 0px 3px 5px #000000;
+  color: white;
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.principales {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--principales);
+}
+
+.secundarios {
+  background: var(--secundarios);
+}
+
+.tema {
+  background-color: transparent;
+  border: none;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--tema_color);
+}
+
+#recuperacion {
+  font-size: 12px;
+  display: grid;
+  color: var(--text_color);
+}
+
+.listas {
+  width: 80%;
+  max-width: 600px;
+  margin: auto;
+  padding: 1px 16px;
+  list-style: decimal;
+  font-size: 16px;
+}
+
+.listas li {
+  text-align: left;
+  text-transform: capitalize;
+  border: var(--listas_border);
+  color: #000000;
+  border-radius: 5px;
+  width: 100%;
+  margin: 5px auto;
+  overflow-wrap: break-word;
+  padding: 5px;
+}
+
+button:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+  filter: brightness(1.1);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+a {
+  text-decoration: none;
+}
+
+#repositorio {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#github {
+  display: inline-block;
+  background: linear-gradient(45deg, #eb3298, #f0a7c2);
+  padding: 5px;
+  font-size: 10px;
+  border-radius: 20px;
+  border: double;
+  color: #000000;
+  box-shadow: 0px 3px 5px #000000;
+}
