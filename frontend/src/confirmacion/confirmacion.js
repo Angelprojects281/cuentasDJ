@@ -17,18 +17,8 @@ function confirmacion() {
         </header>
         <Header2 />
         <section id="content">
-          <h4>confirma los cambios realizados:</h4>
-          <ul class="listas">
-            <li id="elemto1" class="cambio">
-              info 1
-            </li>
-            <li id="elemto2" class="cambio">
-              info 2
-            </li>
-            <li id="elemto3" class="cambio">
-              lista de demas cambios realizados
-            </li>
-          </ul>
+          <h4>Confirma los cambios realizados:</h4>
+          <p className="registroCambios" id="registroCambios"></p>
 
           <button id="confirmar" class="principales confirmacion">
             confirmar cambios

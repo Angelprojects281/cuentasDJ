@@ -6,7 +6,7 @@ import {
 } from "../reutilizables/componentes";
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { href, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 function UsuarioContraseña() {
@@ -38,9 +38,9 @@ function UsuarioContraseña() {
       const decodedToken = jwtDecode(data.token);
 
       if (decodedToken.rol === "admin") {
-        navigate("/principalAdmin");
+        navigate({ replace: true, pathname: "/principalAdmin" });
       } else {
-        navigate("/principalRegular");
+        navigate({ replace: true, pathname: "/principalRegular" });
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
@@ -52,9 +52,9 @@ function UsuarioContraseña() {
       <BotonTema />
       <div id="container">
         <header id="header1">
-          <button id="volver" onClick={() => window.history.back()}>
-            volver
-          </button>
+          <a href="/">
+            <button id="volver">volver</button>
+          </a>
         </header>
         <Header2 />
 

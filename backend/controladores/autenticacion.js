@@ -1,12 +1,14 @@
 const db = require("../config/db");
 const jwt = require("jsonwebtoken");
+require("dotenv").config({ path: __dirname + "/../secretKey.env" });
+const bcrypt = require("bcrypt");
 
-const login = (req, res) => {
+const login = async (req, res) => {
   const { idUsuarios, contraseña } = req.body;
 
-  const query = "SELECT * FROM usuarios WHERE idUsuarios = ?";
+  const query = "SELECT * FROM usuarios WHERE BINARY idUsuarios = ?";
 
-  db.query(query, [idUsuarios], (err, results) => {
+  db.query(query, [idUsuarios], async (err, results) => {
     if (err) {
       return res
         .status(500)
@@ -18,14 +20,15 @@ const login = (req, res) => {
     }
 
     const user = results[0];
+    const coincide = bcrypt.compareSync(contraseña, user.contraseña);
 
-    if (user.contraseña !== contraseña) {
+    if (!coincide) {
       return res.status(401).json({ error: "Contraseña incorrecta" });
     }
 
     const token = jwt.sign(
       { idUsuarios: user.idUsuarios, rol: user.Rol },
-      "secretKey",
+      process.env.JWT_SECRET,
       { expiresIn: "1h" },
     );
     res.json({
