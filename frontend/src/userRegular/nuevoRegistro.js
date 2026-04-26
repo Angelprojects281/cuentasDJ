@@ -5,6 +5,8 @@ import {
   Github,
 } from "../reutilizables/componentes";
 
+import { Link } from "react-router-dom";
+
 function nuevoRegistro() {
   return (
     <div>
@@ -63,11 +65,11 @@ function nuevoRegistro() {
               añadir
             </button>
           </ul>
-          <a href="/confirmacion">
+          <Link to="/principalAdmin">
             <button id="registrar" className="principales">
               registrar informacion
             </button>
-          </a>
+          </Link>
         </section>
         <Footer />
       </div>

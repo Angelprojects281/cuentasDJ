@@ -22,18 +22,11 @@ const transporter = nodemailer.createTransport({
 });
 
 async function enviarCorreo(codigo, idUsuarios, Rol) {
-  return transporter.sendMail({
-    from: process.env.correo,
-    to: process.env.correo,
-    subject: "Código de verificación para cambio de contraseña",
-    html: `<p>Tu código de verificación para el usuario ${idUsuarios} con rol ${Rol} es: <b>${codigo}</b>. Este código es válido por 15 minutos.</p>`,
-  });
-
   const mailOptions = {
     from: process.env.correo,
     to: process.env.correo,
     subject: "Código de verificación para cambio de contraseña",
-    html: `<p>Tu código de verificación para el usuario ${idUsuarios} con rol ${Rol} es: <b>${codigo}</b>. Este código es válido por 15 minutos.</p>`,
+    html: `<p>Tu código de verificación para el usuario <b>${idUsuarios}</b> con rol <b>${Rol}</b> es: <b>${codigo}</b>. Este código es válido por 15 minutos.</p>`,
   };
 
   return transporter.sendMail(mailOptions);

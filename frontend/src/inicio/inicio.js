@@ -5,6 +5,8 @@ import {
   Github,
 } from "../reutilizables/componentes";
 
+import { Link } from "react-router-dom";
+
 function Inicio() {
   return (
     <div>
@@ -19,11 +21,11 @@ function Inicio() {
             sesion⬇️:
           </p>
 
-          <a href="/inicioSesion">
+          <Link to="/inicioSesion">
             <button id="sesion" className="principales">
               iniciar sesion
             </button>
-          </a>
+          </Link>
         </section>
         <Footer />
       </div>

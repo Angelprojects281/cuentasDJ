@@ -5,10 +5,13 @@ import {
   Github,
 } from "../reutilizables/componentes";
 
+import { Link, useNavigate } from "react-router-dom";
+
 function PrincipalRegular() {
+  const navigate = useNavigate();
   const logOut = () => {
     localStorage.removeItem("token");
-    window.location.href = "/inicioSesion";
+    navigate("/inicioSesion");
   };
   return (
     <div>
@@ -18,16 +21,16 @@ function PrincipalRegular() {
         <Header2 />
         <section id="content">
           <p>Panel de usuario regular:</p>
-          <a href="/nuevoRegistro">
+          <Link to="/nuevoRegistro">
             <button id="nuevoRegistro" className="principales">
               nuevo registro
             </button>
-          </a>
-          <a href="/cambiarContraseña">
+          </Link>
+          <Link to="/cambiarContraseña">
             <button id="cambiarContraseña" className="principales">
               cambiar contraseña
             </button>
-          </a>
+          </Link>
 
           <button id="cerrarSesion" className="secundarios" onClick={logOut}>
             cerrar sesion

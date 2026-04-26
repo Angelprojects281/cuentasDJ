@@ -15,6 +15,7 @@ import PrincipalAdmin from "./userAdmin/principalAdmin";
 import AdminUsuarios from "./userAdmin/adminUsuarios";
 import NuevoUsuario from "./userAdmin/nuevoUsuario";
 import AdminRegistros from "./userAdmin/adminRegistros";
+import BuscarEliminar from "./userAdmin/eliminarUsuario";
 
 function App() {
   const logOut = () => {
@@ -26,7 +27,7 @@ function App() {
       alert("Has sido desconectado por inactividad");
     }
   };
-  const idleTimer = useIdleTimer({
+  useIdleTimer({
     timeout: 1000 * 60 * 10,
     onIdle: logOut,
     debounce: 500,
@@ -88,6 +89,15 @@ function App() {
             element={
               <ProteccionRutas
                 pagina={<AdminRegistros />}
+                rolPermitido="admin"
+              />
+            }
+          />
+          <Route
+            path="/eliminarUsuario"
+            element={
+              <ProteccionRutas
+                pagina={<BuscarEliminar />}
                 rolPermitido="admin"
               />
             }

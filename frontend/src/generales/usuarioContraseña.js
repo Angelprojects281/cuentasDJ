@@ -6,7 +6,7 @@ import {
 } from "../reutilizables/componentes";
 
 import { useState } from "react";
-import { href, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 function UsuarioContraseña() {
@@ -15,8 +15,11 @@ function UsuarioContraseña() {
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
-    e.preventDefault();
     try {
+      if (!idUsuarios || !contraseña) {
+        alert("Por favor, completa todos los campos requeridos.");
+        return;
+      }
       const res = await fetch("http://localhost:4000/api/login", {
         method: "POST",
         headers: {
@@ -52,9 +55,9 @@ function UsuarioContraseña() {
       <BotonTema />
       <div id="container">
         <header id="header1">
-          <a href="/">
+          <Link to="/">
             <button id="volver">volver</button>
-          </a>
+          </Link>
         </header>
         <Header2 />
 
@@ -65,7 +68,8 @@ function UsuarioContraseña() {
             placeholder="usuario"
             className="userInput"
             value={idUsuarios}
-            onChange={(e) => setidUsuarios(e.target.value)}
+            onChange={(e) => setidUsuarios(e.target.value.trimStart())}
+            onBlur={(e) => setidUsuarios(e.target.value.trim())}
           ></input>
           <input
             type="password"
@@ -82,9 +86,9 @@ function UsuarioContraseña() {
           >
             iniciar sesion
           </button>
-          <a id="recuperacion" href="/cambiarContraseña">
+          <Link to="/cambiarContraseña" id="recuperacion">
             ¿olvidaste tu contraseña?
-          </a>
+          </Link>
           <p></p>
         </section>
         <Footer />

@@ -6,6 +6,8 @@ import {
 } from "../reutilizables/componentes";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import zxcvbn from "zxcvbn";
 
 function borrarToken() {
   localStorage.removeItem("token");
@@ -13,13 +15,25 @@ function borrarToken() {
 }
 
 function CambiarContraseña() {
-  const [idUsuarios, setUsuario] = useState("");
+  const navigate = useNavigate();
+  const [idUsuarios, setidUsuarios] = useState("");
   const [cNueva, setCNueva] = useState("");
   const [confirmC, setConfirmC] = useState("");
   const [codigo, setCVerificacion] = useState("");
 
+  const [seSolicitoCodigo, setSeSolicitoCodigo] = useState(false);
+
   const handleSolicitarCodigo = async () => {
     try {
+      const resultadoSeguridad = await zxcvbn(cNueva);
+
+      if (resultadoSeguridad.score < 3) {
+        alert(
+          "La contraseña debe contener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y símbolos.",
+        );
+        return;
+      }
+
       const res = await fetch("http://localhost:4000/api/cambiarcontrasena", {
         method: "POST",
         headers: {
@@ -39,7 +53,8 @@ function CambiarContraseña() {
         return;
       }
 
-      alert("Código de verificación enviado a tu correo electrónico");
+      alert("Código de verificación enviado al correo de administración");
+      setSeSolicitoCodigo(true);
     } catch (error) {
       alert("Error al solicitar el código: " + error.message);
     }
@@ -66,7 +81,7 @@ function CambiarContraseña() {
       }
 
       alert("Contraseña cambiada exitosamente");
-      window.location.href = "/inicioSesion";
+      navigate("/inicioSesion");
       localStorage.removeItem("token");
     } catch (error) {
       alert("Error al cambiar la contraseña: " + error.message);
@@ -89,7 +104,11 @@ function CambiarContraseña() {
             id="usuarios"
             placeholder="usuario"
             value={idUsuarios}
-            onChange={(e) => setUsuario(e.target.value)}
+            onChange={(e) => {
+              setidUsuarios(e.target.value.trimStart());
+              setSeSolicitoCodigo(false);
+            }}
+            onBlur={(e) => setidUsuarios(e.target.value.trim())}
           ></input>
           <input
             type="password"
@@ -115,8 +134,9 @@ function CambiarContraseña() {
 
           <button
             id="enviar"
-            className="principales"
+            className={`principales ${seSolicitoCodigo ? "botonDesabilitado" : ""}`}
             onClick={handleSolicitarCodigo}
+            disabled={seSolicitoCodigo}
           >
             Solicitar codigo
           </button>
@@ -129,11 +149,16 @@ function CambiarContraseña() {
             Cambiar contraseña
           </button>
 
-          <a href="/" onClick={borrarToken}>
-            <button id="cancelar" className="secundarios">
-              cancelar
-            </button>
-          </a>
+          <button
+            id="cancelar"
+            className="secundarios"
+            onClick={() => {
+              borrarToken();
+              navigate("/inicioSesion");
+            }}
+          >
+            cancelar
+          </button>
         </section>
         <Footer />
       </div>

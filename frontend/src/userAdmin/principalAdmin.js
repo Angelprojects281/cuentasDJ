@@ -4,6 +4,7 @@ import {
   Footer,
   Github,
 } from "../reutilizables/componentes";
+import { Link } from "react-router-dom";
 
 function principalAdmin() {
   const logOut = () => {
@@ -19,22 +20,23 @@ function principalAdmin() {
         <Header2 />
         <section id="content">
           <p>Panel de administrador:</p>
-          <a href="/adminUsuarios">
+          <Link to="/adminUsuarios">
             <button id="consultarU" className="principales">
               consultar usuarios
             </button>
-          </a>
-          <a href="/adminRegistros">
+          </Link>
+
+          <Link to="/adminRegistros">
             <button id="consultarR" className="principales">
               consultar registros
             </button>
-          </a>
+          </Link>
 
-          <a href="/cambiarContraseña">
+          <Link to="/cambiarContraseña">
             <button id="cambiarC" className="principales">
               cambiar contraseña
             </button>
-          </a>
+          </Link>
 
           <button id="cerrarSesion" className="secundarios" onClick={logOut}>
             cerrar sesion
@@ -42,6 +44,7 @@ function principalAdmin() {
         </section>
         <Footer />
       </div>
+
       <Github />
     </div>
   );

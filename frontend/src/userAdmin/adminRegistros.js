@@ -5,6 +5,8 @@ import {
   Github,
 } from "../reutilizables/componentes";
 
+import { Link } from "react-router-dom";
+
 function adminRegistros() {
   return (
     <div>
@@ -23,21 +25,21 @@ function adminRegistros() {
             <li className="registro">registro 2</li>
             <li className="registro">demas lista de registros</li>
           </ul>
-          <a href="/buscar">
+          <Link to="/consultarRegistro">
             <button id="consultar" className="principales">
               consultar registro por fecha
             </button>
-          </a>
-          <a href="/nuevoRegistro">
+          </Link>
+          <Link to="/nuevoRegistro">
             <button id="editar" className="principales">
               editar registro
             </button>
-          </a>
-          <a href="/buscar">
+          </Link>
+          <Link to="/borrarRegistro">
             <button id="borrar" className="secundarios">
               borrar registro
             </button>
-          </a>
+          </Link>
         </section>
         <Footer />
       </div>

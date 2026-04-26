@@ -34,6 +34,10 @@
   --tema_color: #ffffff;
 }
 
+.botonDesabilitado {
+  background: #3b4252 !important;
+}
+
 * {
   margin: 0;
   padding: 0;
