@@ -7,7 +7,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 
 // pantalla principal del admin, redirige a las diferentes funciones
-function principalAdmin() {
+function PrincipalAdmin() {
   const navigate = useNavigate();
   const logOut = () => {
     localStorage.removeItem("token");
@@ -52,4 +52,4 @@ function principalAdmin() {
   );
 }
 
-export default principalAdmin;
+export default PrincipalAdmin;

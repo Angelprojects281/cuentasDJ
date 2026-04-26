@@ -207,7 +207,6 @@ button:not(.tema) {
 
 .listas li {
   text-align: left;
-  text-transform: capitalize;
   border: var(--listas_border);
   color: #000000;
   border-radius: 5px;
