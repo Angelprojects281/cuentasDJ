@@ -1,3 +1,4 @@
+//proteccion de rutas y permisos
 import { Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 

@@ -3,16 +3,19 @@ const nodemailer = require("nodemailer");
 require("dotenv").config({ path: __dirname + "/../contrasena.env" });
 const bcrypt = require("bcrypt");
 
+// Función para generar un código de verificación aleatorio de 4 dígitos
 function generarCodigo() {
   return Math.floor(1000 + Math.random() * 9000).toString();
 }
 
+// Función para calcular la fecha de expiración del código (15 minutos a partir de ahora)
 function calcularTiempoExpiracion() {
   const ahora = new Date();
   ahora.setMinutes(ahora.getMinutes() + 15);
   return ahora;
 }
 
+// Configuración del transporte de correo utilizando nodemailer
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -21,6 +24,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Función para enviar el correo con el código de verificación
 async function enviarCorreo(codigo, idUsuarios, Rol) {
   const mailOptions = {
     from: process.env.correo,
@@ -32,6 +36,7 @@ async function enviarCorreo(codigo, idUsuarios, Rol) {
   return transporter.sendMail(mailOptions);
 }
 
+// Función para manejar la solicitud de cambio de contraseña
 const cambiarcontrasena = async (req, res) => {
   const { idUsuarios, cNueva, confirmC } = req.body;
 
@@ -88,6 +93,7 @@ const cambiarcontrasena = async (req, res) => {
   });
 };
 
+// Función para manejar la verificación del código de cambio de contraseña
 const verificarCodigoCambiocontrasena = (req, res) => {
   const { idUsuarios, codigo } = req.body;
 

@@ -8,11 +8,13 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+//maneja la eliminacion de usuarios
 function BuscarEliminar() {
   const navigate = useNavigate();
   const [usuarios, setUsuarios] = useState([]);
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState("");
 
+  //valida la autorizacion del token y lista los usuarios
   const obtenerUsuarios = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -36,6 +38,7 @@ function BuscarEliminar() {
     obtenerUsuarios();
   }, []);
 
+  //selecciona el usuario y pide la confirmacion, y envia el usuario al backend para ser eliminado
   const handleEliminarUsuario = async () => {
     if (!usuarioSeleccionado) {
       alert("Por favor, selecciona un usuario para eliminar.");
@@ -90,6 +93,7 @@ function BuscarEliminar() {
             id="selectUsuario"
             onChange={(e) => setUsuarioSeleccionado(e.target.value)}
           >
+            {/*mapeo para listar los usuarios de la base de datos*/}
             <option value="">-- Seleccione un usuario --</option>
             {usuarios.map((usuario, index) => (
               <option key={usuario.idUsuarios} value={usuario.idUsuarios}>

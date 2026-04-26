@@ -1,3 +1,4 @@
+// contexto para realizar el cambio de tema
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext();

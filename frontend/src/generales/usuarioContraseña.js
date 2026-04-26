@@ -9,11 +9,13 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
+//gestiona el inicio de sesion
 function UsuarioContraseña() {
   const [idUsuarios, setidUsuarios] = useState("");
   const [contraseña, setContraseña] = useState("");
   const navigate = useNavigate();
 
+  // realiza validaciones previas, guarda el token en local y redirige a la pagina correspondiente
   const handleLogin = async (e) => {
     try {
       if (!idUsuarios || !contraseña) {

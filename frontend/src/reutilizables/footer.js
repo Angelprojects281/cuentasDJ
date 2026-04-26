@@ -1,3 +1,5 @@
+//pie de pagina
+
 function Footer() {
   return (
     <footer>

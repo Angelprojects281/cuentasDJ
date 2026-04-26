@@ -1,3 +1,4 @@
+//header que incluye el logo
 import Logo from "../media/logotipo.png";
 function Header2() {
   return (

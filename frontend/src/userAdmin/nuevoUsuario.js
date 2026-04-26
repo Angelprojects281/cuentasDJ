@@ -9,12 +9,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import zxcvbn from "zxcvbn";
 
+//gestion para agregar usuarios
 function NuevoUsuario() {
   const navigate = useNavigate();
   const [idUsuarios, setidUsuarios] = useState("");
   const [cNueva, setCNueva] = useState("");
   const [Rol, setRol] = useState("vacio");
 
+  //validaciones generales, validaciones de seguridad de la contraseña y validacion hacia el backend
   const handleCrearUsuario = async () => {
     try {
       if (!idUsuarios || !cNueva) {

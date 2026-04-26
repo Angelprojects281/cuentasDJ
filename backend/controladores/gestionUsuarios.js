@@ -1,6 +1,7 @@
 const db = require("../config/db");
 const jwt = require("jsonwebtoken");
 
+// Verificacion del token valido
 const verificarToken = (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1];
 
@@ -16,6 +17,7 @@ const verificarToken = (req, res, next) => {
   }
 };
 
+//listar todos los usuarios de la base de datos
 const listarUsuarios = async (req, res) => {
   const query = "SELECT idUsuarios, Rol FROM usuarios ORDER BY idUsuarios ASC";
 
@@ -29,6 +31,7 @@ const listarUsuarios = async (req, res) => {
   });
 };
 
+// Seleccionar usuario para eliminarlo con su iD y evitar eliminarse a si mismo
 const eliminarUsuario = async (req, res) => {
   const { idUsuarios } = req.params;
 

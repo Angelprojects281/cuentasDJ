@@ -4,12 +4,14 @@ import {
   Footer,
   Github,
 } from "../reutilizables/componentes";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
+// pantalla principal del admin, redirige a las diferentes funciones
 function principalAdmin() {
+  const navigate = useNavigate();
   const logOut = () => {
     localStorage.removeItem("token");
-    window.location.href = "/inicioSesion";
+    navigate("/inicioSesion");
   };
 
   return (

@@ -1,6 +1,7 @@
 const db = require("../config/db");
 const bcrypt = require("bcrypt");
 
+// Función para manejar la creación de un nuevo usuario
 const crearUsuario = async (req, res) => {
   const { idUsuarios, cNueva, Rol } = req.body;
 
@@ -21,6 +22,7 @@ const crearUsuario = async (req, res) => {
       return res.status(400).json({ error: "El usuario ya existe" });
     }
 
+    // Hash de la contraseña antes de almacenarla en la base de datos
     const cHash = bcrypt.hashSync(cNueva, 10);
 
     const queryInsert =

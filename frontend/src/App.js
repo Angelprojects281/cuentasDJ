@@ -17,6 +17,7 @@ import NuevoUsuario from "./userAdmin/nuevoUsuario";
 import AdminRegistros from "./userAdmin/adminRegistros";
 import BuscarEliminar from "./userAdmin/eliminarUsuario";
 
+//gestion de rutas y rutas protegidas
 function App() {
   const logOut = () => {
     if (!localStorage.getItem("token")) {

@@ -1,3 +1,4 @@
+//pantalla en espera de ser utilizada
 import {
   BotonTema,
   Footer,

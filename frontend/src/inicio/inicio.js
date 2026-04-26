@@ -5,6 +5,7 @@ import {
   Github,
 } from "../reutilizables/componentes";
 
+//pagina de bienvenida
 import { Link } from "react-router-dom";
 
 function Inicio() {

@@ -9,11 +9,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import zxcvbn from "zxcvbn";
 
+// eliminar el token del local storage
 function borrarToken() {
   localStorage.removeItem("token");
   window.history.back();
 }
 
+//manejo de cambio de contraseña
 function CambiarContraseña() {
   const navigate = useNavigate();
   const [idUsuarios, setidUsuarios] = useState("");
@@ -23,6 +25,7 @@ function CambiarContraseña() {
 
   const [seSolicitoCodigo, setSeSolicitoCodigo] = useState(false);
 
+  //evalua la seguridad de contraseña y envia la solicitud del codigo al backend
   const handleSolicitarCodigo = async () => {
     try {
       const resultadoSeguridad = await zxcvbn(cNueva);
@@ -60,6 +63,7 @@ function CambiarContraseña() {
     }
   };
 
+  //espera la confirmacion de codigo del backend y si la validacion es correcta informa para que se realice el cambio
   const handleCambiarContraseña = async () => {
     try {
       const res = await fetch("http://localhost:4000/api/verificarCodigo", {

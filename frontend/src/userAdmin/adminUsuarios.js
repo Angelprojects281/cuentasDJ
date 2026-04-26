@@ -8,6 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+// ver la lista de todos los ususarios y opciones para agregar y eliminar usuarios
 function AdminUsuarios() {
   const [usuarios, setUsuarios] = useState([]);
 
@@ -41,6 +42,7 @@ function AdminUsuarios() {
         <Header2 />
         <section id="content">
           <h4>lista de usuarios: </h4>
+          {/*mapeo de la lista de usuario devuelta por el backend*/}
           <ul className="listas" id="listaUsuarios">
             {usuarios.map((usuarios, index) => (
               <li key={usuarios.idUsuarios} value={usuarios.idUsuarios}>

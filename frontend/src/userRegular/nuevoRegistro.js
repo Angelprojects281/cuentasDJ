@@ -1,3 +1,4 @@
+//pendiente por configurar
 import {
   BotonTema,
   Header2,

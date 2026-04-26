@@ -7,6 +7,7 @@ import {
 
 import { Link, useNavigate } from "react-router-dom";
 
+// menu principal del usuario regular
 function PrincipalRegular() {
   const navigate = useNavigate();
   const logOut = () => {
