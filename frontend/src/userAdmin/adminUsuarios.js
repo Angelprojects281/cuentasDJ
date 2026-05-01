@@ -7,6 +7,7 @@ import {
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { mostrarAlerta } from "../reutilizables/alertas";
 
 // ver la lista de todos los ususarios y opciones para agregar y eliminar usuarios
 function AdminUsuarios() {
@@ -19,7 +20,7 @@ function AdminUsuarios() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.error || "Error al obtener usuarios");
+        mostrarAlerta("error", "Error al obtener usuario", data.error);
       }
       setUsuarios(data);
     } catch (error) {

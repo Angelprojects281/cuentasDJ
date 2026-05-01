@@ -8,6 +8,7 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import zxcvbn from "zxcvbn";
+import { mostrarAlerta } from "../reutilizables/alertas";
 
 //gestion para agregar usuarios
 function NuevoUsuario() {
@@ -20,21 +21,30 @@ function NuevoUsuario() {
   const handleCrearUsuario = async () => {
     try {
       if (!idUsuarios || !cNueva) {
-        alert("Por favor, completa todos los campos requeridos.");
+        mostrarAlerta(
+          "warning",
+          "No se pudo crear el usuario",
+          "faltan campos requeridos",
+        );
         return;
       }
       const resultadoSeguridad = await zxcvbn(cNueva);
 
       if (resultadoSeguridad.score < 3) {
-        alert(
-          "La contraseña debe contener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y símbolos.",
+        mostrarAlerta(
+          "warning",
+          "Contraseña insegura",
+          "La contraseña debe tener minimo 8 caracteres incluyendo numeros y simbolos",
         );
         return;
       }
 
       if (Rol === "vacio") {
-        alert("Por favor, selecciona un rol para el usuario.");
-        console.log("Rol seleccionado:", Rol); // Verificar el valor de Rol
+        mostrarAlerta(
+          "warning",
+          "No se pudo crear el usuario",
+          "Seleccione un rol para el usuario",
+        );
         return;
       }
 
@@ -53,14 +63,18 @@ function NuevoUsuario() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.error || "Error al crear el usuario");
+        mostrarAlerta("error", "Error al crear el usuario", data.error);
         return;
       }
 
-      alert("Usuario creado exitosamente");
+      mostrarAlerta(
+        "succes",
+        "Usuario creado correctamente",
+        "ya puede iniciar sesion con el nuevo usuario",
+      );
       navigate("/principalAdmin");
     } catch (error) {
-      alert("Error al crear el usuario: error de conexión con el servidor");
+      mostrarAlerta("error", "Algo salio mal", "intente de nuevo mas tarde");
     }
   };
 

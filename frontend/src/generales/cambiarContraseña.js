@@ -8,6 +8,7 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import zxcvbn from "zxcvbn";
+import { mostrarAlerta } from "../reutilizables/alertas";
 
 // eliminar el token del local storage
 function borrarToken() {
@@ -31,8 +32,10 @@ function CambiarContraseña() {
       const resultadoSeguridad = await zxcvbn(cNueva);
 
       if (resultadoSeguridad.score < 3) {
-        alert(
-          "La contraseña debe contener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y símbolos.",
+        mostrarAlerta(
+          "warning",
+          "Contraseña insegura",
+          "La contraseña debe contener al menos 8 caracteres incluyendo numeros y simbolos",
         );
         return;
       }
@@ -52,14 +55,22 @@ function CambiarContraseña() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.error || "Error al solicitar el código");
+        mostrarAlerta("error", "Error al enviar el codigo", data.error);
         return;
       }
 
-      alert("Código de verificación enviado al correo de administración");
+      mostrarAlerta(
+        "info",
+        "Codigo enviado correctamente",
+        "El codigo a sido enviado al correo de administracion.",
+      );
       setSeSolicitoCodigo(true);
     } catch (error) {
-      alert("Error al solicitar el código: " + error.message);
+      mostrarAlerta(
+        "error",
+        "Error al solicitar el codigo",
+        "Hubo un error al solicitar el codigo, intente mas tarde",
+      );
     }
   };
 
@@ -80,15 +91,23 @@ function CambiarContraseña() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.error || "Error al verificar el código");
+        mostrarAlerta("error", "Error al confirmar el codigo", data.error);
         return;
       }
 
-      alert("Contraseña cambiada exitosamente");
+      mostrarAlerta(
+        "success",
+        "Contraseña cambiada correctamente",
+        "Ya puede iniciar sesion con su nueva contraseña",
+      );
       navigate("/inicioSesion");
       localStorage.removeItem("token");
     } catch (error) {
-      alert("Error al cambiar la contraseña: " + error.message);
+      mostrarAlerta(
+        "error",
+        "Error al cambiar la contraseña",
+        "hubo un error al cambiar la contraseña, intente mas tarde",
+      );
     }
   };
 
@@ -97,7 +116,7 @@ function CambiarContraseña() {
       <BotonTema />
       <div id="container">
         <header id="header1">
-          <button id="volver" onClick={borrarToken}>
+          <button id="volver" onClick={() => window.history.back()}>
             Volver
           </button>
         </header>

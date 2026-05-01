@@ -27,11 +27,6 @@ function PrincipalRegular() {
               nuevo registro
             </button>
           </Link>
-          <Link to="/cambiarContraseña">
-            <button id="cambiarContraseña" className="principales">
-              cambiar contraseña
-            </button>
-          </Link>
 
           <button id="cerrarSesion" className="secundarios" onClick={logOut}>
             cerrar sesion

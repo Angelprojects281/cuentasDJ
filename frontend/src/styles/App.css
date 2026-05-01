@@ -10,7 +10,7 @@
   --volver: linear-gradient(45deg, #908d8d, #7cbfd2);
   --principales: linear-gradient(45deg, #4cc4e5, #2d78d3);
   --secundarios: linear-gradient(45deg, #ef3268, #eb3298);
-  --listas_border: 1px solid #1b1919;
+  --listas_border: 3px solid #1b1919;
   --text_color: #281cd4;
   --filter_img: brightness(0) invert(0) opacity(1);
   --tema_color: #000000;
@@ -28,7 +28,7 @@
   --volver: linear-gradient(45deg, #322929, #60529b);
   --principales: linear-gradient(45deg, #0e0f15, #0a2a52);
   --secundarios: linear-gradient(45deg, #302427, #790746);
-  --listas_border: 1px solid #000000;
+  --listas_border: 3px solid #000000;
   --text_color: hsl(252, 91%, 17%);
   --filter_img: brightness(0) invert(1) opacity(0.8);
   --tema_color: #ffffff;
@@ -83,18 +83,30 @@ body {
   filter: var(--filter_img);
 }
 
-#registroCambios {
+#detallesProduccion {
+  border: solid 3px #000000;
+  border-radius: 15px;
+  text-align: left;
+  line-height: 30px;
+  box-shadow: 0px 3px 5px #000000;
+}
+
+.fila {
   display: flex;
-  margin: 5px auto;
-  overflow-wrap: break-word;
-  padding: 5px;
-  min-width: 200px;
-  min-height: 100px;
-  margin: 5px auto;
-  text-align: center;
-  font-size: 15px;
-  padding: 15px;
+  align-items: center;
+  margin-bottom: 8px;
   border: solid 1px #000000;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 10px;
+}
+
+.fila strong {
+  width: 250px;
+}
+
+.fila span {
+  flex: 3;
 }
 
 section {
@@ -109,6 +121,34 @@ section {
   font-size: 20px;
   font-weight: bold;
   text-align: center;
+}
+
+#registroBaches {
+  border: solid 3px #000000;
+  border-radius: 10px;
+  box-shadow: 0px 3px 5px inset #3a3838;
+}
+
+#detallesProduccionT {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #000000;
+}
+
+#detallesProduccionT th {
+  text-align: left;
+  padding: 8px;
+  width: 250px;
+  border-bottom: 1px solid #000000;
+}
+
+#detallesProduccionT td {
+  padding: 8px;
+  border-bottom: 1px solid #000000;
+  border-left: 1px solid #000000;
 }
 
 footer {
@@ -138,7 +178,7 @@ select {
   font-size: 18px;
   padding: 10px;
   outline: none;
-  box-shadow: 0px 2px 5px #000000;
+  box-shadow: 0px 2px 3px inset#000000;
   transition: outline 0.2s ease;
 }
 
@@ -209,11 +249,13 @@ button:not(.tema) {
   text-align: left;
   border: var(--listas_border);
   color: #000000;
-  border-radius: 5px;
+  border-radius: 15px;
   width: 100%;
   margin: 5px auto;
+  margin-bottom: 20px;
   overflow-wrap: break-word;
   padding: 5px;
+  box-shadow: 0px 3px 5px #000000;
 }
 
 button:hover {
@@ -244,4 +286,18 @@ a {
   border: double;
   color: #000000;
   box-shadow: 0px 3px 5px #000000;
+}
+
+.alertStyle {
+  background: var(--container_color);
+  border: 3px solid #000000;
+  border-radius: 30px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0px 3px 10px #1b1919;
+  padding: 20px;
+}
+.swal2-actions {
+  display: flex;
+  gap: 10px;
 }

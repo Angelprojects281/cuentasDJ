@@ -7,6 +7,7 @@ import {
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { mostrarAlerta, mostrarConfirmacion } from "../reutilizables/alertas";
 
 //maneja la eliminacion de usuarios
 function BuscarEliminar() {
@@ -27,7 +28,7 @@ function BuscarEliminar() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.error || "Error al obtener usuarios");
+        mostrarAlerta("error", "Error al obtener usuarios", data.error);
       }
       setUsuarios(data);
     } catch (error) {
@@ -41,14 +42,21 @@ function BuscarEliminar() {
   //selecciona el usuario y pide la confirmacion, y envia el usuario al backend para ser eliminado
   const handleEliminarUsuario = async () => {
     if (!usuarioSeleccionado) {
-      alert("Por favor, selecciona un usuario para eliminar.");
+      mostrarAlerta(
+        "warning",
+        "Error de eliminacion",
+        "por favor seleccione un usuario valido",
+      );
       return;
     }
 
-    const confirmacion = window.confirm(
-      `¿Estás seguro de que deseas eliminar al usuario ${usuarioSeleccionado}?`,
+    const result = await mostrarConfirmacion(
+      "question",
+      "¿Deseas eliminar a este usuario?",
+      "revisa nuevamense la informacion si es necesario",
     );
-    if (!confirmacion) {
+
+    if (!result.isConfirmed) {
       return;
     }
 
@@ -66,14 +74,18 @@ function BuscarEliminar() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.error || "Error al eliminar el usuario");
+        mostrarAlerta("error", "Error al eliminar usuario", data.error);
         return;
       }
 
-      alert("Usuario eliminado exitosamente");
+      mostrarAlerta(
+        "confirm",
+        "Usuario eliminado correctamente",
+        "el usuario se elimino correctamente",
+      );
       navigate("/principalAdmin");
     } catch (error) {
-      alert("Error al eliminar el usuario: error de conexión con el servidor");
+      mostrarAlerta("error", "Algo salio mal", "intente nuevamente mas tarde");
     }
   };
 

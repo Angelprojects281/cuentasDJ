@@ -7,8 +7,6 @@ import ProteccionRutas from "./reutilizables/proteccionRutas";
 import Inicio from "./inicio/inicio";
 import InicioSesion from "./generales/usuarioContraseña";
 import CambiarContraseña from "./generales/cambiarContraseña";
-import Buscar from "./generales/busqueda";
-import Confirmacion from "./confirmacion/confirmacion";
 import PrincipalRegular from "./userRegular/principalRegular";
 import NuevoRegistro from "./userRegular/nuevoRegistro";
 import PrincipalAdmin from "./userAdmin/principalAdmin";
@@ -41,8 +39,6 @@ function App() {
           <Route path="/" element={<Inicio />} />
           <Route path="/inicioSesion" element={<InicioSesion />} />
           <Route path="/cambiarContraseña" element={<CambiarContraseña />} />
-          <Route path="/buscar" element={<Buscar />} />
-          <Route path="/confirmacion" element={<Confirmacion />} />
           <Route
             path="/principalRegular"
             element={

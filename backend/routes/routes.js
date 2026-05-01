@@ -14,6 +14,13 @@ const {
   verificarToken,
 } = require("../controladores/gestionUsuarios");
 
+const {
+  consultarRegistro,
+  eliminarReg,
+} = require("../controladores/consultDelR");
+
+const { CrearRegistro } = require("../controladores/nuevoRegistro");
+
 // ruta login
 router.post("/login", login);
 
@@ -31,5 +38,15 @@ router.get("/listarUsuarios", listarUsuarios);
 
 //ruta eliminar usuario
 router.delete("/usuario/:idUsuarios", verificarToken, eliminarUsuario);
+
+//ruta crear registro
+router.post("/crearRegistro", CrearRegistro);
+
+//ruta consultar registro
+router.get("/consultarRegistro/", consultarRegistro);
+
+//ruta eliminar registro
+
+router.delete("/eliminarRegistro/:idProduccion", eliminarReg);
 
 module.exports = router;

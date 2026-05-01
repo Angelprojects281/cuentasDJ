@@ -34,6 +34,9 @@ const crearUsuario = async (req, res) => {
           .status(500)
           .json({ error: "Error al insertar el usuario en la base de datos" });
       }
+      console.log(
+        `Usuario creado con el nombre ${idUsuarios} y con rol ${Rol}: ${new Date().toLocaleString()}\n `,
+      );
       return res.json({ message: "Usuario creado exitosamente" });
     });
   });

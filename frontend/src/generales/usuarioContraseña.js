@@ -8,6 +8,7 @@ import {
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { mostrarAlerta } from "../reutilizables/alertas";
 
 //gestiona el inicio de sesion
 function UsuarioContraseña() {
@@ -19,7 +20,11 @@ function UsuarioContraseña() {
   const handleLogin = async (e) => {
     try {
       if (!idUsuarios || !contraseña) {
-        alert("Por favor, completa todos los campos requeridos.");
+        mostrarAlerta(
+          "error",
+          "Error al iniciar sesion",
+          "Debes ingresar todos los datos requeridos",
+        );
         return;
       }
       const res = await fetch("http://localhost:4000/api/login", {
@@ -34,7 +39,7 @@ function UsuarioContraseña() {
       console.log(data);
 
       if (!res.ok) {
-        alert(data.error || "Error al iniciar sesión");
+        mostrarAlerta("error", "Error al iniciar sesion", data.error);
         throw new Error(data.error || "Error al iniciar sesión");
       }
       console.log("Inicio de sesión exitoso:", data);

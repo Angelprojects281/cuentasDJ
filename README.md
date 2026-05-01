@@ -36,6 +36,7 @@
    - react-scripts: Proporciona la configuración base y scripts de desarrollo para la aplicación.
    - web-vitals: Permite medir métricas clave de rendimiento web.
    - zxcvbn: Evalúa la fortaleza de contraseñas ingresadas por el usuario.
+   - sweetalert: crea alertas personalizadas de manera sencilla.
 
 2. backend:
    - bcrypt: Biblioteca para el cifrado seguro de contraseñas mediante hashing.
@@ -62,13 +63,13 @@ Este proyecto utiliza un sistema de gestion de ususarios centralizado en adminis
 
 - Archivo llamado "contrasena.env" que debe tener el siguiente contenido:
 
-```
+```bash
 correo= (aqui se coloca el correo gmail al que llegaran los correos)
 contrasena= (aqui pondras la contraseña de aplicacion que te dara google automaticamente, NO PONER TU CONTRASEÑA REAL||     enlace tuto para generar la contraseña: https://youtube.com/shorts/QzR0SnqcHbo?si=S1EEUTVjZ3g1PMv-  || creditos:     TechForest)
 ```
 
 - Archivo llamado "secretKey.env" que debe tener el siguiente contenido:
-  ```
+  ```bash
   JWT-SECRET= (aqui va una contraseña de tu preferencia, prioriza que sea segura)
   ```
 
@@ -80,82 +81,57 @@ contrasena= (aqui pondras la contraseña de aplicacion que te dara google automa
 
 - En el siguiente comando se crea la base de datos, se crea la tabla con los campos requeridos y se crea un usuario por defecto para inicio de sesion:
 
-- Crear base de datos
+- Crear base de datos:
 
-```
- CREATE DATABASE IF NOT EXISTS cuentasdjusers
- CHARACTER SET utf8mb4
- COLLATE utf8mb4_0900_ai_ci;
+Ejecuta el script SQL incluido:
 
- -- Usar la base de datos
- USE cuentasdjusers;
-
- -- Eliminar tabla si existe
- DROP TABLE IF EXISTS usuarios;
-
- -- Crear tabla
- CREATE TABLE usuarios (
- idUsuarios VARCHAR(20) NOT NULL,
- contraseña VARCHAR(255) NOT NULL,
- Rol VARCHAR(15) NOT NULL DEFAULT 'regular',
- codigo_verificacion VARCHAR(6) DEFAULT NULL,
- codigo_expiracion DATETIME DEFAULT NULL,
- nueva_contraseña VARCHAR(255) DEFAULT NULL,
- PRIMARY KEY (idUsuarios),
- UNIQUE KEY idUsuarios_UNIQUE (idUsuarios)
- ) ENGINE=InnoDB;
-
- -- Insertar usuario administrador por defecto
- INSERT INTO usuarios (
- idUsuarios,
- contraseña,
- Rol,
- codigo_verificacion,
- codigo_expiracion,
- nueva_contraseña
- ) VALUES (
- 'admin',
- '$2a$10$/Urr3jVrFlXwqcHqD9eZ2eTgtChNUdsUhAq8atUBOnU06KPYTQdw6',
- 'admin',
- NULL,
- NULL,
- NULL
- );
+```bash
+mysql -u root -p < esquemasSQL/tablaUsuarios.sql
 ```
 
 Para realizar el inicio de sesion se crea un usuario por defecto con credenciales:
 
 ```
-  Usuario: Admin
-  contraseña: Admin
+Usuario: Admin
+contraseña: Admin
 ```
 
 la contraseña se genera con un hash de bcrypt externo, y ya que el backend tenga acceso a la base de datos usara la dependencia bcrypt para comparar la contraseña en texto plano en el modulo de inicio de sesion con la contraseña guardada en la base de datos.
 
+- el siguiente comando es para la creacion de la base de datos de las cuentas, la cual tiene dos tablas:
+
+Ejecuta el script SQL incluido:
+
+```bash
+mysql -u root -p < esquemasSQL/tablaUsuarios.sql
+```
+
 3.3: conexion a la base de datos:
 
-para conectar tu base de datos debes dirigirte a la ruta "/backend/config/db.js
+para conectar tu base de datos debes dirigirte a la ruta "/backend/config/db.js" o "backend/config/dbProduccion.js
 aqui encontraras y modificaras el siguiente contenido:
 
-```
+```bash
+
     const mysql = require("mysql2");
 
-  const db = mysql.createConnection({
-    host: "localhost", -> el host de tu servidor de base de datos
-    user: "root", -> el nombre de usuario que tengas configurado en tu servidor
-    password: "sqlCuentasdj", -> la contraseña de tu servidor
-    database: "cuentasdjUsers", -> la base de datos que creamos previamente
-  });
+const db = mysql.createConnection({
+host: "localhost", -> el host de tu servidor de base de datos
+user: "root", -> el nombre de usuario que tengas configurado en tu servidor
+password: "sqlCuentasdj", -> la contraseña de tu servidor
+database: "cuentasdjUsers", -> la base de datos que creamos previamente
+});
 
-  db.connect((err) => { -> no modificar, esto comprueba que el backend si se esta comunicando con la base de datos
-    if (err) {
-      console.error("Error al conectar a la base de datos:", err);
-      return;
-    }
-    console.log("Conexión a la base de datos establecida");
-  });
+db.connect((err) => { -> no modificar, esto comprueba que el backend si se esta comunicando con la base de datos
+if (err) {
+console.error("Error al conectar a la base de datos:", err);
+return;
+}
+console.log("Conexión a la base de datos establecida");
+);
 
-  module.exports = db;
+module.exports = db;
+
 ```
 
 # Cosas a tener en cuenta
@@ -225,217 +201,270 @@ A lo largo de su desarrollo se aplicaron conceptos importantes como:
 
 ### Y SI ESTAS LEYENDO ESTO ME AYUDARIAS MUCHO CON TU ESTRELLA⭐
 
-##### In English.
+# 🗽In English
 
-# Project CuentasDJ
+# CuentasDJ Project
 
-## Project context:
+## README Language Note
 
-- This is a practical project that utilizes technologies like React, Node.js, and MySQL. Its purpose is to simulate an account and user management system for a food-related company. The goal is not only to manage accounts effectively, but also to create a system with a strong focus on security and handling sensitive data.
+This README is available in Spanish and English. However, since the project is commented in Spanish, it is recommended to use the VS Code extension **"Comment Translate"** to translate code comments if needed.
 
-## Current status of the project:
+---
 
-- At this very moment, the project already includes modules for managing users, such as:
+# Project Overview
 
-1.  Creation of new users
-2.  User deletion
-3.  \-Security validations/Verifications
-4.  \-Specific error handling, both common user errors and complex server errors
-5.  \-Real database management with MySQL
-6.  \-Real user interaction with route protections and access protection
+## CuentasDJ Project
 
-## Main dependencies and libraries you must install for its operation:
+## Project Context
 
-1.  frontend:
-    - @testing-library/dom: Tools for reliably testing the DOM.
-    - @testing-library/jest-dom: Extends Jest with DOM-specific assertions to validate DOM elements.
-    - @testing-library/react: Facilitates testing of React components by simulating their real behavior.
-    - @testing-library/user-event: Allows simulating user interactions in automated tests.
-    - jwt-decode: A utility for decoding JWT tokens on the client side.
-    - React: The main library for building user interfaces.
-    - react-dom: Handles the rendering of React components in the browser.
-    - react-idle-timer: Detects user inactivity within the application.
-    - react-router-dom: Handles navigation and routing in React applications.
-    - react-scripts: Provides the base configuration and development scripts for the application.
-    - web-vitals: Allows measuring key web performance metrics.
-    - zxcvbn: Evaluates the strength of passwords entered by the user.
+This is a practice project using **React, Node.js, and MySQL**. It simulates an account and user management system for a food company.
 
-2.  backend:
-    - bcrypt: Library for securely hashing passwords.
-    - Cors: A middleware that enables and configures cross-domain access (Cross-Origin Resource Sharing).
-    - dotenv: Allows for managing environment variables from .env files.
-    - Express: A web framework for Node.js, used for building APIs and handling server routes.
-    - jsonwebtoken: It implements the generation and validation of JWT tokens for authentication and authorization purposes.
-    - mysql2: A MySQL client for Node.js that offers efficient querying capabilities and support for promises.
-    - nodemailer: A tool for sending emails from the server.
+The goal is not only to manage accounts but also to implement a robust system focused on **security and sensitive data handling**.
 
-# How to set it up for use and testing:
+---
 
-### Installing dependencies:
+## Current Project Status
 
-Make sure to install each of the dependencies mentioned earlier. In this project, the latest versions of each dependency were used.
+At this moment, the project includes user management modules such as:
 
-### 2\. Creating .env files for tokens and emails:
+1. Creation of new users
+2. Deletion of users
+3. Security validations
+4. Structured error handling (both user-level and server-side errors)
+5. Real database integration using MySQL
+6. Secure user interaction with route protection and access control
 
-This project uses a centralized user management system controlled by administrators. In other words, all emails related to codes are sent to a single administrator’s email address.
+---
 
-2.1: After having the folders in your local repository, you need to create the following files specifically:
+## Main Dependencies and Libraries
 
-### In the /backend/ directory (the root directory of the backend):
+### Frontend
 
-- The file called “contrasena.env” should contain the following content:
+- @testing-library/dom: Tools for DOM testing
+- @testing-library/jest-dom: Custom Jest DOM matchers
+- @testing-library/react: Testing React components
+- @testing-library/user-event: Simulates user interactions
+- jwt-decode: Decodes JWT tokens in the client
+- react: UI library
+- react-dom: DOM rendering for React
+- react-idle-timer: Detects user inactivity
+- react-router-dom: Routing system
+- react-scripts: CRA configuration
+- web-vitals: Performance metrics
+- zxcvbn: Password strength estimator
+- sweetalert: Custom alert system
 
-```
-correo= (Enter the Gmail address where you want to receive emails here)
-contrasena= (Enter the app password that Google will automatically generate here. DO NOT ENTER YOUR ACTUAL PASSWORD|| Link to the tutorial for generating the password: https://youtube.com/shorts/QzR0SnqcHbo?si=S1EEUTVjZ3g1PMv- || Credits: TechForest)
-```
+---
 
-- There’s a file called “secretKey.env”, which must contain the following content:
+### Backend
 
-  ```
-  JWT-SECRET= (Here's a password of your choice—make sure it's secure)
-  ```
+- bcrypt: Password hashing
+- cors: Cross-Origin Resource Sharing middleware
+- dotenv: Environment variable management
+- express: Node.js server framework
+- jsonwebtoken: JWT authentication
+- mysql2: MySQL driver
+- nodemailer: Email sending service
 
-### 3\. Database configuration:
+---
 
-3.1: To configure the database, you need to create the tables either in the command-line interface of your server, or by executing the commands directly in MySQL Workbench.
+# Setup Instructions
 
-3.2: command for database creation:
+## 1. Install Dependencies
 
-- In the following command, the database is created, the table with the required fields is created, and a default user is created for login:
-- Create database
+Install all dependencies listed above using npm. Latest stable versions were used.
 
-```
- CREATE DATABASE IF NOT EXISTS cuentasdjusers
- CHARACTER SET utf8mb4
- COLLATE utf8mb4_0900_ai_ci;
+---
 
- -- Usar la base de datos
- USE cuentasdjusers;
+## 2. Environment Variables
 
- -- Eliminar tabla si existe
- DROP TABLE IF EXISTS usuarios;
+This system uses a centralized admin-based user management flow.
 
- -- Crear tabla
- CREATE TABLE usuarios (
- idUsuarios VARCHAR(20) NOT NULL,
- contraseña VARCHAR(255) NOT NULL,
- Rol VARCHAR(15) NOT NULL DEFAULT 'regular',
- codigo_verificacion VARCHAR(6) DEFAULT NULL,
- codigo_expiracion DATETIME DEFAULT NULL,
- nueva_contraseña VARCHAR(255) DEFAULT NULL,
- PRIMARY KEY (idUsuarios),
- UNIQUE KEY idUsuarios_UNIQUE (idUsuarios)
- ) ENGINE=InnoDB;
+### Backend required files:
 
- -- Insertar usuario administrador por defecto
- INSERT INTO usuarios (
- idUsuarios,
- contraseña,
- Rol,
- codigo_verificacion,
- codigo_expiracion,
- nueva_contraseña
- ) VALUES (
- 'admin',
- '$2a$10$/Urr3jVrFlXwqcHqD9eZ2eTgtChNUdsUhAq8atUBOnU06KPYTQdw6',
- 'admin',
- NULL,
- NULL,
- NULL
- );
+#### `/backend/contrasena.env`
+
+```bash
+correo= (your Gmail address for receiving emails)
+contrasena= (Google App Password, NOT your real password)
 ```
 
-To perform login, a default user is created with credentials:
+> Important: Do NOT use your real Gmail password.
 
-```
-  User: Admin
-  password: Admin
-```
+---
 
-The password is generated using an external bcrypt hash. Since the backend has access to the database, it uses the bcrypt library to compare the plain-text password entered during login with the password stored in the database.
+#### `/backend/secretKey.env`
 
-3.3: Connecting to the database:
-
-To connect your database, you need to go to the path “/backend/config/db.js”. There, you’ll find and be able to modify the following content:
-
-```
-    const mysql = require("mysql2");
-
-  const db = mysql.createConnection({
-    host: "localhost", -> the host of your database server
-    user: "root", -> the username you have set up on your server
-    password: "sqlCuentasdj", -> your server password
-    database: "cuentasdjUsers", -> the database we created earlier
-  });
-
-  db.connect((err) => { -> Do not modify this; it verifies that the backend is communicating with the database.
-    if (err) {
-      console.error("Error al conectar a la base de datos:", err);
-      return;
-    }
-    console.log("Conexión a la base de datos establecida");
-  });
-
-  module.exports = db;
+```bash
+JWT-SECRET= (your secure secret key)
 ```
 
-# Things to keep in mind
+---
 
-#### The names of the variables are, for the most part, in Spanish.
+# 3. Database Setup
 
-#### The variables “contraseña” and “contrasena” can be considered inconsistent with each other. However, this is due to the configuration of both Node.js and the database settings. These variables should be left as they are in order for everything to function properly.
+## Create database and tables
 
-#### The backend and frontend are separate entities. Therefore, it’s important to read the following section in order to understand how to configure both servers.
+Run the following command:
 
-# server configuration and connection
+```bash
+mysql -u root -p < esquemasSQL/tablaUsuarios.sql
+```
 
-### Frontend server:
+---
 
-This server is responsible for rendering the entire frontend portion of the website. It also makes requests to the backend server and performs various validations before and after user interactions.
+## Default login user
 
-## Configuration of the frontend server
+A default user is created for testing purposes:
 
-This server uses the default configuration of `create-react-app` . By default, it runs on port 3000, with the URL `Local: http://localhost:3000` .
+```text
+Usuario: Admin
+contraseña: Admin
+```
 
-To start the server, we’ll use PowerShell or any command-line interface. We’ll navigate to the `../cuentasdjreact/frontend` path, and once there, we’ll execute the `npm start` command. If everything goes well, a confirmation message will appear in the console, stating `webpack compiled successfully` .
+Passwords are hashed using bcrypt. The backend compares the plaintext password with the stored hash during login.
 
-## Configuration of the backend server
+---
 
-On this server, we need to apply a different configuration, as it needs to run on a different port from the frontend.
+# Database Connection
 
-If we look at the route `../backend/app.js` , we can see that on line 28, port 4000 is selected. This port can be changed as desired, but it’s important to note that we’ll also need to modify the frontend components so that they can communicate with the newly assigned port.
+Go to:
 
-## Release of the backend
+```
+/backend/config/db.js
+```
 
-To launch this server, we need to open the console as before, navigate to the path `../cuentasdjreact/backend` , and then execute the command `node app` there. If everything goes well, the console will display the confirmation message `Servidor corriendo en http://localhost:4000 Conexión a la base de datos establecida` .
+or
 
-## MySQL server configuration
+```
+/backend/config/dbProduccion.js
+```
 
-Here, we’ve used MySQL Workbench. This tool allows us to create a local server for our databases. To set up this local server, we can follow a simple tutorial. The simplest tutorial can be found at: https://youtu.be/aA\_qp6pqbPI?si=MTMvh0Hb7gRI16T8 || Credits: VerTutoriales
+Modify the following configuration:
 
-Here, it shows us how to establish a connection to the server. Previously, we’ve already completed the configuration of this database. Configuration.
+```js
+const mysql = require("mysql2");
 
-## Recommendations before launching the servers
+const db = mysql.createConnection({
+  host: "localhost", // database host
+  user: "root", // database user
+  password: "sqlCuentasdj", // database password
+  database: "cuentasdjUsers", // database name
+});
 
-- Verify that both the backend and frontend are using the correct ports.
-- Verify that no other server is running on that port at the same time.
-- Make sure that if you make any minor changes, whether to the routes or ports, you also update all the components that use those changes.
+// DO NOT MODIFY: verifies backend DB connection
 
-### Final feedback/Comments
+db.connect((err) => {
+  if (err) {
+    console.error("Error connecting to database:", err);
+    return;
+  }
+  console.log("Database connection established");
+});
 
-This project represents a practical implementation of a user management system that places strong emphasis on security, data validation, and the separation of responsibilities between the frontend and backend components.
+module.exports = db;
+```
 
-Throughout its development, important concepts were applied, such as:
+---
 
-- Token-based authentication (JWT)
-- Password encryption using bcrypt
-- Managing user roles (administrator/regular user)
-- Validations are performed on both the client-side and the server-side.
+# Important Notes
+
+1. Most variable names are in Spanish by design.
+2. There is intentional usage of both `contraseña` and `contrasena` due to system constraints.
+3. Frontend and backend are separated and must be configured independently.
+
+---
+
+# Server Setup
+
+## Frontend Server
+
+Runs using Create React App on:
+
+```
+http://localhost:3000
+```
+
+### Start frontend:
+
+```bash
+cd ../cuentasdjreact/frontend
+npm start
+```
+
+If successful, you will see:
+
+```
+webpack compiled successfully
+```
+
+---
+
+## Backend Server
+
+Backend runs on port 4000 by default.
+
+File:
+
+```
+/backend/app.js
+```
+
+### Start backend:
+
+```bash
+cd ../cuentasdjreact/backend
+node app
+```
+
+Expected output:
+
+```
+Server running at http://localhost:4000
+Database connection established
+```
+
+---
+
+## MySQL Setup
+
+This project uses MySQL Workbench for local database management.
+
+Tutorial reference:
+https://youtu.be/aA_qp6pqbPI
+
+---
+
+# Recommendations Before Running
+
+- Ensure frontend and backend ports are correctly configured
+- Ensure no other services are using the same ports
+- If you modify routes or ports, update them across all components
+
+---
+
+# Final Thoughts
+
+This project demonstrates a user management system focused on:
+
+- Security
+- Data validation
+- Separation of frontend and backend
+
+Implemented concepts include:
+
+- JWT authentication
+- bcrypt password encryption
+- Role-based access control (admin / regular)
+- Client and server-side validation
 - Structured error handling
-- Using environment variables to protect sensitive information
+- Environment variables for sensitive data
 - Full integration between frontend, backend, and database
 
-#### we take into account that this project is currently focused on a test environment and aims to be adapted and improved for a real production environment, so many changes and configurations are missing that will be implemented over time, in addition to this project only having one collaborator, which increases development time, the implementation of features, and the correction of possible errors.
+---
 
-### And if you are reading this, you would help me a lot with your star⭐
+This project is currently intended for testing purposes and will be improved over time for production use. Development is ongoing and handled by a single contributor.
+
+---
+
+### ⭐ If you are reading this, a star would be appreciated!

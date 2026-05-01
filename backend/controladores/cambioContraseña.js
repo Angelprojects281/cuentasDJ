@@ -82,6 +82,9 @@ const cambiarcontrasena = async (req, res) => {
 
         try {
           await enviarCorreo(codigo, user.idUsuarios, user.Rol);
+          console.log(
+            `se envio codigo de verificacion para el usuario ${idUsuarios}: ${new Date().toLocaleString()}\n`,
+          );
           return res.json({
             message: "Código de verificación enviado al correo",
           });
@@ -148,6 +151,9 @@ const verificarCodigoCambiocontrasena = (req, res) => {
           .status(500)
           .json({ error: "Error al actualizar la contraseña" });
       }
+      console.log(
+        `contraseña cambiada para el usuario ${idUsuarios}: ${new Date().toLocaleString()}\n`,
+      );
       return res.json({ message: "contraseña actualizada correctamente" });
     });
   });

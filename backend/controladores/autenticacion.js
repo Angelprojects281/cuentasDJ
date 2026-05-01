@@ -36,6 +36,9 @@ const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1h" },
     );
+    console.log(
+      `El usuario ${user.idUsuarios} inicio sesion: ${new Date().toLocaleString()} \n `,
+    );
     res.json({
       message: "Inicio de sesión exitoso",
       user: { idUsuarios: user.idUsuarios, rol: user.Rol },

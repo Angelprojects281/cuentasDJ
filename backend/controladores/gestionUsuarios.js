@@ -55,7 +55,9 @@ const eliminarUsuario = async (req, res) => {
     if (results.affectedRows === 0) {
       return res.status(404).json({ error: "Usuario no encontrado" });
     }
-
+    console.log(
+      `Usuario ${idUsuarios} eliminado: ${new Date().toLocaleString()}\n`,
+    );
     return res.json({ message: "Usuario eliminado exitosamente" });
   });
 };
