@@ -14,6 +14,7 @@ function AdminRegistros() {
   const [fecha, setfecha] = useState("");
   const [produccion, setproduccion] = useState(null);
   const [baches, setbaches] = useState([]);
+  const [mostrarBaches, setmostrarBaches] = useState(null);
 
   const handleConsultarRegistro = async () => {
     try {
@@ -103,6 +104,14 @@ function AdminRegistros() {
     setfecha("");
     setproduccion(null);
     setbaches([]);
+  };
+
+  const handleMostrarBaches = async () => {
+    if (mostrarBaches === null) {
+      setmostrarBaches("0");
+    } else {
+      setmostrarBaches(null);
+    }
   };
 
   return (
@@ -205,6 +214,15 @@ function AdminRegistros() {
             </section>
           )}
           {produccion && (
+            <button
+              id="mostrarBaches"
+              className="principales"
+              onClick={handleMostrarBaches}
+            >
+              Mostrar baches registrados ⬇️
+            </button>
+          )}
+          {mostrarBaches && (
             <section id="detallesBaches">
               <h4>Lista de baches: </h4>
               {baches.length > 0 ? (
