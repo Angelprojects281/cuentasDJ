@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 
+//alertas y confirmaciones personalizadas con sweetalert
 export function mostrarAlerta(simbolo, titulo, mensaje) {
   Swal.fire({
     title: titulo,

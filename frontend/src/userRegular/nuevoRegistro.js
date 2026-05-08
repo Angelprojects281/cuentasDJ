@@ -288,7 +288,7 @@ function NuevoRegistro() {
             >
               Eliminar ultimo bache
             </button>
-            <h4>lista de baches: </h4>
+            {listaBaches.length > 0 && <h4>lista de baches: </h4>}
             <ul className="listas">
               {listaBaches.map((bache, index) => (
                 <li key={index}>

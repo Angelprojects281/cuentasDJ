@@ -106,13 +106,17 @@ function AdminRegistros() {
     setbaches([]);
   };
 
-  const handleMostrarBaches = async () => {
+  const handleMostrarBaches = () => {
     if (mostrarBaches === null) {
       setmostrarBaches("0");
     } else {
       setmostrarBaches(null);
     }
   };
+  const text =
+    mostrarBaches === null
+      ? `Mostrar lista de baches⬇️`
+      : `Ocultar lista de baches⬆️`;
 
   return (
     <div>
@@ -219,7 +223,7 @@ function AdminRegistros() {
               className="principales"
               onClick={handleMostrarBaches}
             >
-              Mostrar baches registrados ⬇️
+              {text}
             </button>
           )}
           {mostrarBaches && (

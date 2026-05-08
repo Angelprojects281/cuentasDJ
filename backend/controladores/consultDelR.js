@@ -1,5 +1,6 @@
 const dbProduccion = require("../config/dbProduccion");
 
+// selecciona la tabla de produccion y los registros de los baches relacionados
 const consultarRegistro = async (req, res) => {
   try {
     const { turno, fecha } = req.query;
@@ -31,6 +32,7 @@ const consultarRegistro = async (req, res) => {
   }
 };
 
+// elimina todos los registros de baches y produccion
 const eliminarReg = async (req, res) => {
   try {
     const { idProduccion } = req.params;

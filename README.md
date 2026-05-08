@@ -20,6 +20,7 @@
 4. -manejo especifico de errores tanto errores comunes de ususario como errores complejos bajo los servidores
 5. -manejo de base de datos real con MySQL
 6. -interaccion real de usuarios con protecciones de rutas y proteccion de acceso
+7. -modulos para la creacion y consulta de gestion de produccion con logica matematica implementada
 
 ## Principales dependencias y librerias que debes instalar para su funcionamiento:
 
