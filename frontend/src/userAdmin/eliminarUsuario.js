@@ -79,7 +79,7 @@ function BuscarEliminar() {
       }
 
       mostrarAlerta(
-        "confirm",
+        "success",
         "Usuario eliminado correctamente",
         "el usuario se elimino correctamente",
       );

@@ -8,7 +8,7 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import zxcvbn from "zxcvbn";
-import { mostrarAlerta } from "../reutilizables/alertas";
+import { mostrarAlerta, mostrarConfirmacion } from "../reutilizables/alertas";
 
 //gestion para agregar usuarios
 function NuevoUsuario() {
@@ -48,6 +48,16 @@ function NuevoUsuario() {
         return;
       }
 
+      const result = await mostrarConfirmacion(
+        "question",
+        "¿Confirma que desea crear este usuario?",
+        "dale confirmar para crear el usuario",
+      );
+
+      if (!result.isConfirmed) {
+        return;
+      }
+
       const res = await fetch("http://localhost:4000/api/crearUsuario", {
         method: "POST",
         headers: {
@@ -68,7 +78,7 @@ function NuevoUsuario() {
       }
 
       mostrarAlerta(
-        "succes",
+        "success",
         "Usuario creado correctamente",
         "ya puede iniciar sesion con el nuevo usuario",
       );
@@ -95,6 +105,7 @@ function NuevoUsuario() {
             <option value="vacio">selecciona un rol</option>
             <option value="admin">administrador</option>
             <option value="regular">regular</option>
+            <option value="auditor">auditor</option>
           </select>
 
           <input

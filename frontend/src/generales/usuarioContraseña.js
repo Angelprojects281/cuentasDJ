@@ -49,8 +49,10 @@ function UsuarioContraseña() {
 
       if (decodedToken.rol === "admin") {
         navigate({ replace: true, pathname: "/principalAdmin" });
-      } else {
+      } else if (decodedToken.rol === "regular") {
         navigate({ replace: true, pathname: "/principalRegular" });
+      } else {
+        navigate({ replace: true, pathname: "/principalAuditor" });
       }
     } catch (error) {
       console.error("Error al iniciar sesión:", error);

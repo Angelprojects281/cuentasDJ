@@ -14,6 +14,8 @@ import AdminUsuarios from "./userAdmin/adminUsuarios";
 import NuevoUsuario from "./userAdmin/nuevoUsuario";
 import AdminRegistros from "./userAdmin/adminRegistros";
 import BuscarEliminar from "./userAdmin/eliminarUsuario";
+import PrincipalAuditor from "./userAuditor/principalAuditor";
+import ConsultarActividad from "./userAuditor/consultarActividad";
 
 //gestion de rutas y rutas protegidas
 function App() {
@@ -96,6 +98,21 @@ function App() {
               <ProteccionRutas
                 pagina={<BuscarEliminar />}
                 rolPermitido="admin"
+              />
+            }
+          />
+          <Route
+            path="/principalAuditor"
+            element={
+              <ProteccionRutas pagina={<PrincipalAuditor />}></ProteccionRutas>
+            }
+          />
+          <Route
+            path="/consultarActividad"
+            element={
+              <ProteccionRutas
+                pagina={<ConsultarActividad />}
+                rolPermitido="auditor"
               />
             }
           />

@@ -1,4 +1,3 @@
-//pendiente por configurar
 import {
   BotonTema,
   Header2,
@@ -96,7 +95,7 @@ function AdminRegistros() {
     }
 
     mostrarAlerta(
-      "confirm",
+      "success",
       "Registro eliminado correctamente",
       "se realizo la eliminacion del registro",
     );
