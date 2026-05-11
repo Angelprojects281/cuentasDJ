@@ -2,6 +2,9 @@ const db = require("../config/db");
 const jwt = require("jsonwebtoken");
 require("dotenv").config({ path: __dirname + "/../secretKey.env" });
 const bcrypt = require("bcrypt");
+const {
+  CrearRegistroAuditoria,
+} = require("../controladores/registroAuditoria");
 
 // Función para manejar el inicio de sesión
 const login = async (req, res) => {
@@ -36,8 +39,9 @@ const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1h" },
     );
-    console.log(
-      `El usuario ${user.idUsuarios} inicio sesion: ${new Date().toLocaleString()} \n `,
+    CrearRegistroAuditoria(
+      "inicio_sesion",
+      `Inicio de sesion para el usuario ${idUsuarios}`,
     );
     res.json({
       message: "Inicio de sesión exitoso",

@@ -1,5 +1,8 @@
 const db = require("../config/db");
 const jwt = require("jsonwebtoken");
+const {
+  CrearRegistroAuditoria,
+} = require("../controladores/registroAuditoria");
 
 // Verificacion del token valido
 const verificarToken = (req, res, next) => {
@@ -55,9 +58,11 @@ const eliminarUsuario = async (req, res) => {
     if (results.affectedRows === 0) {
       return res.status(404).json({ error: "Usuario no encontrado" });
     }
-    console.log(
-      `Usuario ${idUsuarios} eliminado: ${new Date().toLocaleString()}\n`,
+    CrearRegistroAuditoria(
+      "eliminar_usuario",
+      `se elimino el usuario ${idUsuarios}`,
     );
+
     return res.json({ message: "Usuario eliminado exitosamente" });
   });
 };

@@ -67,6 +67,9 @@ function ConsultarActividad() {
             >
               <option value={""}>-- Seleccione el tipo de actividad</option>
               <option value={"inicio_sesion"}>Inicios de sesion</option>
+              <option value={"codigo_verificacion"}>
+                Codigos de verificacion generados
+              </option>
               <option value={"cambio_contraseña"}>Cambios de contraseña</option>
               <option value={"nuevo_registro"}>Nuevos registros</option>
               <option value={"eliminar_registro"}>

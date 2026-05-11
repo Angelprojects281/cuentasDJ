@@ -1,4 +1,7 @@
 const dbProduccion = require("../config/dbProduccion");
+const {
+  CrearRegistroAuditoria,
+} = require("../controladores/registroAuditoria");
 
 // selecciona la tabla de produccion y los registros de los baches relacionados
 const consultarRegistro = async (req, res) => {
@@ -49,8 +52,9 @@ const eliminarReg = async (req, res) => {
       .promise()
       .query(queryDelProd, [idProduccion]);
 
-    console.log(
-      `Se a eliminado un registro: ${new Date().toLocaleString()} \n`,
+    CrearRegistroAuditoria(
+      "eliminar_registro",
+      "se realizo la eliminacion de un registro",
     );
 
     return res

@@ -2,6 +2,9 @@ const db = require("../config/db");
 const nodemailer = require("nodemailer");
 require("dotenv").config({ path: __dirname + "/../contrasena.env" });
 const bcrypt = require("bcrypt");
+const {
+  CrearRegistroAuditoria,
+} = require("../controladores/registroAuditoria");
 
 // Función para generar un código de verificación aleatorio de 4 dígitos
 function generarCodigo() {
@@ -82,8 +85,9 @@ const cambiarcontrasena = async (req, res) => {
 
         try {
           await enviarCorreo(codigo, user.idUsuarios, user.Rol);
-          console.log(
-            `se envio codigo de verificacion para el usuario ${idUsuarios}: ${new Date().toLocaleString()}\n`,
+          CrearRegistroAuditoria(
+            "codigo_verificacion",
+            `se envio un codigo de verificacion para el usuarios ${idUsuarios}`,
           );
           return res.json({
             message: "Código de verificación enviado al correo",
@@ -151,8 +155,9 @@ const verificarCodigoCambiocontrasena = (req, res) => {
           .status(500)
           .json({ error: "Error al actualizar la contraseña" });
       }
-      console.log(
-        `contraseña cambiada para el usuario ${idUsuarios}: ${new Date().toLocaleString()}\n`,
+      CrearRegistroAuditoria(
+        "cambio_contraseña",
+        `contraseña cambiada para el usuario ${idUsuarios}`,
       );
       return res.json({ message: "contraseña actualizada correctamente" });
     });

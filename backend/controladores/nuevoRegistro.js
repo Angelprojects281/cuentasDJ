@@ -4,6 +4,9 @@ const {
   kilosBacheT,
   griegoEntregadoT,
 } = require("../logicaMat/logicaMat");
+const {
+  CrearRegistroAuditoria,
+} = require("../controladores/registroAuditoria");
 
 // funcion para crear un nuevo registro
 
@@ -129,9 +132,7 @@ const CrearRegistro = async (req, res) => {
         ]);
     }
 
-    console.log(
-      `Se realizo un registro nuevo: ${new Date().toLocaleString()} \n`,
-    );
+    CrearRegistro("nuevo_registro", "se realizo un nuevo registro");
 
     return res.status(201).json({ message: "Registro creado exitosamente" });
   } catch (error) {

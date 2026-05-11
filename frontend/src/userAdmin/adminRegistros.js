@@ -14,6 +14,12 @@ function AdminRegistros() {
   const [produccion, setproduccion] = useState(null);
   const [baches, setbaches] = useState([]);
   const [mostrarBaches, setmostrarBaches] = useState(null);
+  const fechaActual =
+    new Date().getFullYear() +
+    "-" +
+    String(new Date().getMonth() + 1).padStart(2, "0") +
+    "-" +
+    String(new Date().getDate()).padStart(2, "0");
 
   const handleConsultarRegistro = async () => {
     try {
@@ -22,6 +28,15 @@ function AdminRegistros() {
           "warning",
           "Error al consultar",
           "faltan campos requeridos",
+        );
+        return;
+      }
+
+      if (fechaActual < fecha) {
+        mostrarAlerta(
+          "error",
+          "Error al consultar",
+          "la fecha no puede ser mayor a la fecha actual",
         );
         return;
       }

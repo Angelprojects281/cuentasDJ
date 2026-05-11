@@ -21,6 +21,7 @@
 5. -manejo de base de datos real con MySQL
 6. -interaccion real de usuarios con protecciones de rutas y proteccion de acceso
 7. -modulos para la creacion y consulta de gestion de produccion con logica matematica implementada
+8. -gestion de auditorias para cambios en el sistema
 
 ## Principales dependencias y librerias que debes instalar para su funcionamiento:
 
@@ -107,9 +108,17 @@ Ejecuta el script SQL incluido:
 mysql -u root -p < esquemasSQL/tablaUsuarios.sql
 ```
 
+- el siguiente comando es para la creacion de la base de datos de las auditorias, la cual tiene dos tablas:
+
+Ejecuta el script SQL incluido:
+
+```bash
+mysql -u root -p < esquemasSQL/tablaAuditoria.sql
+```
+
 3.3: conexion a la base de datos:
 
-para conectar tu base de datos debes dirigirte a la ruta "/backend/config/db.js" o "backend/config/dbProduccion.js
+para conectar tu base de datos debes dirigirte a la ruta "/backend/config/db.js" o "backend/config/dbProduccion.js" o "/backend/config/dbAuditoria.js"
 aqui encontraras y modificaras el siguiente contenido:
 
 ```bash

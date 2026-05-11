@@ -1,5 +1,8 @@
 const db = require("../config/db");
 const bcrypt = require("bcrypt");
+const {
+  CrearRegistroAuditoria,
+} = require("../controladores/registroAuditoria");
 
 // Función para manejar la creación de un nuevo usuario
 const crearUsuario = async (req, res) => {
@@ -34,8 +37,9 @@ const crearUsuario = async (req, res) => {
           .status(500)
           .json({ error: "Error al insertar el usuario en la base de datos" });
       }
-      console.log(
-        `Usuario creado con el nombre ${idUsuarios} y con rol ${Rol}: ${new Date().toLocaleString()}\n `,
+      CrearRegistroAuditoria(
+        "nuevo_usuario",
+        `se creo un nuevo usuario con nombre ${idUsuarios} y con rol ${Rol}`,
       );
       return res.json({ message: "Usuario creado exitosamente" });
     });

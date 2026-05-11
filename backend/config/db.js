@@ -14,7 +14,7 @@ db.connect((err) => {
     console.error("Error al conectar a la base de datos:", err);
     return;
   }
-  console.log("Conexión a la base de datos establecida");
+  console.log("Conexión a la base de datos de usuarios establecida");
 });
 
 module.exports = db;
