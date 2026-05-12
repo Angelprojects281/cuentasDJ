@@ -49,6 +49,8 @@
    - mysql2: Cliente de MySQL para Node.js con soporte para consultas eficientes y promesas.
    - nodemailer: Herramienta para el envío de correos electrónicos desde el servidor.
 
+   ### para instalar todas las dependencias dirigete en tu consola a la ruta "/cuentasdjreact/backend" o "/cuentasdjreact/frontend" y ejecuta el comando `npm install`, esto instalara automaticamente todas las dependencias necesarias.
+
 # Como configurarlo para su uso y prueba:
 
 ### 1. instalacion de dependencias:
@@ -221,260 +223,247 @@ This README is available in Spanish and English. However, since the project is c
 
 ---
 
-# Project Overview
-
-## CuentasDJ Project
+# CuentasDJ Project
 
 ## Project Context
 
-This is a practice project using **React, Node.js, and MySQL**. It simulates an account and user management system for a food company.
-
-The goal is not only to manage accounts but also to implement a robust system focused on **security and sensitive data handling**.
-
----
+- This project is a practice project that uses technologies such as React, Node.js, and MySQL. It aims to simulate an account and user management system for a food company, with the purpose of not only managing accounts but also implementing a robust system focused on security and sensitive data handling.
 
 ## Current Project Status
 
-At this moment, the project includes user management modules such as:
+- At this moment, the project already includes user management modules such as:
 
 1. Creation of new users
-2. Deletion of users
+2. User deletion
 3. Security validations
-4. Structured error handling (both user-level and server-side errors)
-5. Real database integration using MySQL
-6. Secure user interaction with route protection and access control
+4. Specific error handling for both common user errors and complex server-side errors
+5. Real database management using MySQL
+6. Real user interaction with route protection and access protection
+7. Modules for production management creation and queries with implemented mathematical logic
+8. Audit management for system changes
 
----
+## Main Dependencies and Libraries Required
 
-## Main Dependencies and Libraries
+### 1. Frontend
 
-### Frontend
+- @testing-library/dom: Tools for reliably testing the DOM.
+- @testing-library/jest-dom: Extends Jest with specific assertions to validate DOM elements.
+- @testing-library/react: Simplifies React component testing by simulating real behavior.
+- @testing-library/user-event: Allows simulation of user interactions in automated tests.
+- jwt-decode: Utility for decoding JWT tokens on the client side.
+- react: Main library for building user interfaces.
+- react-dom: Handles rendering React components in the browser.
+- react-idle-timer: Detects user inactivity within the application.
+- react-router-dom: Manages navigation and routing in React applications.
+- react-scripts: Provides the base configuration and development scripts for the application.
+- web-vitals: Allows measuring key web performance metrics.
+- zxcvbn: Evaluates the strength of passwords entered by the user.
+- sweetalert: Creates custom alerts easily.
 
-- @testing-library/dom: Tools for DOM testing
-- @testing-library/jest-dom: Custom Jest DOM matchers
-- @testing-library/react: Testing React components
-- @testing-library/user-event: Simulates user interactions
-- jwt-decode: Decodes JWT tokens in the client
-- react: UI library
-- react-dom: DOM rendering for React
-- react-idle-timer: Detects user inactivity
-- react-router-dom: Routing system
-- react-scripts: CRA configuration
-- web-vitals: Performance metrics
-- zxcvbn: Password strength estimator
-- sweetalert: Custom alert system
+### 2. Backend
 
----
+- bcrypt: Library for secure password hashing using encryption.
+- cors: Middleware that enables and configures Cross-Origin Resource Sharing.
+- dotenv: Allows management of environment variables through `.env` files.
+- express: Web framework for Node.js used to build APIs and manage server routes.
+- jsonwebtoken: Implements JWT token generation and validation for authentication and authorization.
+- mysql2: MySQL client for Node.js with support for efficient queries and promises.
+- nodemailer: Tool for sending emails from the server.
 
-### Backend
-
-- bcrypt: Password hashing
-- cors: Cross-Origin Resource Sharing middleware
-- dotenv: Environment variable management
-- express: Node.js server framework
-- jsonwebtoken: JWT authentication
-- mysql2: MySQL driver
-- nodemailer: Email sending service
-
----
-
-# Setup Instructions
-
-## 1. Install Dependencies
-
-Install all dependencies listed above using npm. Latest stable versions were used.
-
----
-
-## 2. Environment Variables
-
-This system uses a centralized admin-based user management flow.
-
-### Backend required files:
-
-#### `/backend/contrasena.env`
+### To install all dependencies, navigate in your console to the path `/cuentasdjreact/backend` or `/cuentasdjreact/frontend` and execute the command:
 
 ```bash
-correo= (your Gmail address for receiving emails)
-contrasena= (Google App Password, NOT your real password)
+npm install
 ```
 
-> Important: Do NOT use your real Gmail password.
+This will automatically install all required dependencies.
 
----
+# How to Configure It for Usage and Testing
 
-#### `/backend/secretKey.env`
+## 1. Dependency Installation
+
+Make sure to install each of the dependencies mentioned above. This project was developed using the latest versions of each one.
+
+## 2. Creating `.env` Files for Tokens and Emails
+
+This project uses a centralized administrator-based user management system, meaning all email codes are sent to a single administrator email account.
+
+### 2.1 Required Files
+
+After having the folders in your local repository, you must create the following files specifically:
+
+### In the `/backend/` path (backend root folder):
+
+- File named `contrasena.env` which must contain the following content:
 
 ```bash
-JWT-SECRET= (your secure secret key)
+correo= (place here the Gmail account that will receive the emails)
+contrasena= (place here the application password automatically generated by Google, DO NOT USE YOUR REAL PASSWORD || tutorial link to generate the password: https://youtube.com/shorts/QzR0SnqcHbo?si=S1EEUTVjZ3g1PMv- || credits: TechForest)
 ```
 
----
+- File named `secretKey.env` which must contain the following content:
 
-# 3. Database Setup
+```bash
+JWT-SECRET= (place here a secure password of your preference)
+```
 
-## Create database and tables
+# 3. Database Configuration
 
-Run the following command:
+### 3.1 Database Setup
+
+To configure the database, you must create the table either through your server command console or by directly executing the command in MySQL Workbench.
+
+### 3.2 Database Creation Commands
+
+- The following command creates the database, creates the table with the required fields, and creates a default user for login purposes.
+
+### Create Database
+
+Execute the included SQL script:
 
 ```bash
 mysql -u root -p < esquemasSQL/tablaUsuarios.sql
 ```
 
----
+A default user is created for login with the following credentials:
 
-## Default login user
-
-A default user is created for testing purposes:
-
-```text
+```txt
 Usuario: Admin
 contraseña: Admin
 ```
 
-Passwords are hashed using bcrypt. The backend compares the plaintext password with the stored hash during login.
+The password is generated using an external bcrypt hash, and once the backend has access to the database, it will use the bcrypt dependency to compare the plain text password entered in the login module with the password stored in the database.
 
----
+- The following command is used to create the accounts database, which contains two tables:
 
-# Database Connection
+Execute the included SQL script:
 
-Go to:
-
-```
-/backend/config/db.js
+```bash
+mysql -u root -p < esquemasSQL/tablaUsuarios.sql
 ```
 
-or
+- The following command is used to create the audit database, which contains two tables:
 
+Execute the included SQL script:
+
+```bash
+mysql -u root -p < esquemasSQL/tablaAuditoria.sql
 ```
-/backend/config/dbProduccion.js
-```
 
-Modify the following configuration:
+### 3.3 Database Connection
 
-```js
+To connect your database, navigate to the path:
+
+- `/backend/config/db.js`
+- `/backend/config/dbProduccion.js`
+- `/backend/config/dbAuditoria.js`
+
+There you will find and modify the following content:
+
+```bash
 const mysql = require("mysql2");
 
 const db = mysql.createConnection({
-  host: "localhost", // database host
-  user: "root", // database user
-  password: "sqlCuentasdj", // database password
-  database: "cuentasdjUsers", // database name
+host: "localhost", -> your database server host
+user: "root", -> the username configured on your server
+password: "sqlCuentasdj", -> your server password
+database: "cuentasdjUsers", -> the database we previously created
 });
 
-// DO NOT MODIFY: verifies backend DB connection
-
-db.connect((err) => {
-  if (err) {
-    console.error("Error connecting to database:", err);
-    return;
-  }
-  console.log("Database connection established");
+db.connect((err) => { -> do not modify, this checks whether the backend is communicating with the database
+if (err) {
+console.error("Error connecting to the database:", err);
+return;
+}
+console.log("Database connection established");
 });
 
 module.exports = db;
 ```
 
----
+# Important Things to Keep in Mind
 
-# Important Notes
+#### 1. Most variable names are written in Spanish.
 
-1. Most variable names are in Spanish by design.
-2. There is intentional usage of both `contraseña` and `contrasena` due to system constraints.
-3. Frontend and backend are separated and must be configured independently.
+#### 2. The variables `contraseña` and `contrasena` may appear inconsistent, but this is due to both Node.js configuration and database variable configuration. They must remain exactly as they are for proper functionality.
 
----
+#### 3. The backend and frontend are separated individually, which is why it is important to read the following section to understand how to configure both servers.
 
-# Server Setup
+# Server Configuration and Connection
 
 ## Frontend Server
 
-Runs using Create React App on:
+This server is responsible for rendering the entire frontend, making requests to the backend server, and performing validations before and after user interaction.
 
-```
-http://localhost:3000
+## Frontend Server Configuration
+
+This server uses the default `create-react-app` configuration, which runs by default on port `3000` with the URL:
+
+```txt
+Local: http://localhost:3000
 ```
 
-### Start frontend:
+To initialize the server, open PowerShell or any command console, navigate to the path `../cuentasdjreact/frontend`, and execute the command:
 
 ```bash
-cd ../cuentasdjreact/frontend
 npm start
 ```
 
-If successful, you will see:
+If everything went correctly, a confirmation message saying `webpack compiled successfully` will appear in the console.
 
-```
-webpack compiled successfully
-```
+## Backend Server Configuration
 
----
+This server requires a different configuration because it must run on a different port from the frontend.
 
-## Backend Server
+If we navigate to the path `../backend/app.js`, we can see on line 28 that port `4000` is selected.
 
-Backend runs on port 4000 by default.
+This port can be modified as desired, taking into account that the frontend components must also be updated to call the new assigned port.
 
-File:
+## Launching the Backend
 
-```
-/backend/app.js
-```
-
-### Start backend:
+To launch this server, open the console as before and navigate to the path `../cuentasdjreact/backend`, then execute the command:
 
 ```bash
-cd ../cuentasdjreact/backend
 node app
 ```
 
-Expected output:
+If everything went correctly, the console will display the confirmation message:
 
+```txt
+Servidor corriendo en http://localhost:4000
+Conexión a la base de datos establecida
 ```
-Server running at http://localhost:4000
-Database connection established
-```
 
----
+## MySQL Server Configuration
 
-## MySQL Setup
+In this project, MySQL Workbench was used, which allows us to create a local server for our databases. To create this local server, you can follow a simple tutorial.
 
-This project uses MySQL Workbench for local database management.
+In this case, the most simplified tutorial can be found at:
+https://youtu.be/aA_qp6pqbPI?si=MTMvh0Hb7gRI16T8 || credits: VerTutoriales
 
-Tutorial reference:
-https://youtu.be/aA_qp6pqbPI
+Here it explains how to create the server connection, and previously we already configured this database.
+[configuration](#3-database-configuration)
 
----
+## Recommendations Before Launching the Servers
 
-# Recommendations Before Running
+- Verify that the backend and frontend are using the correct ports.
+- Verify that no other server is running simultaneously on those ports.
+- Verify that if you make any small changes, whether in routes or ports, you also update all components where they are used.
 
-- Ensure frontend and backend ports are correctly configured
-- Ensure no other services are using the same ports
-- If you modify routes or ports, update them across all components
+### Final Feedback
 
----
+This project represents a practical implementation of a user management system with a clear focus on security, data validation, and separation of responsibilities between frontend and backend.
 
-# Final Thoughts
+Throughout its development, important concepts were applied such as:
 
-This project demonstrates a user management system focused on:
-
-- Security
-- Data validation
-- Separation of frontend and backend
-
-Implemented concepts include:
-
-- JWT authentication
-- bcrypt password encryption
-- Role-based access control (admin / regular)
-- Client and server-side validation
+- JWT-based authentication
+- Password encryption using bcrypt
+- User role management (administrator / regular)
+- Client-side and server-side validations
 - Structured error handling
-- Environment variables for sensitive data
-- Full integration between frontend, backend, and database
+- Use of environment variables to protect sensitive information
+- Complete integration between frontend, backend, and database
 
----
+#### Keep in mind that this project is currently focused on a testing environment and aims to be adapted and improved for a real production environment, so many changes and configurations are still pending and will continue to be implemented over time. Additionally, this project currently has only one collaborator, which increases development time, feature implementation time, and the correction of possible errors.
 
-This project is currently intended for testing purposes and will be improved over time for production use. Development is ongoing and handled by a single contributor.
-
----
-
-### ⭐ If you are reading this, a star would be appreciated!
+### AND IF YOU ARE READING THIS, YOUR STAR WOULD HELP ME A LOT ⭐
