@@ -18,8 +18,10 @@ function ConsultarActividad() {
     String(new Date().getMonth() + 1).padStart(2, "0") +
     "-" +
     String(new Date().getDate()).padStart(2, "0");
+  const [results, setResults] = useState([]);
+  const [mostarInfo, setMostrarInfo] = useState([]);
 
-  const handleConsultarActividades = () => {
+  const handleConsultarActividades = async () => {
     if (!tipoActividad || !fechaInicio || !fechaFin) {
       mostrarAlerta(
         "warning",
@@ -46,7 +48,33 @@ function ConsultarActividad() {
       );
       return;
     }
+
+    const res = await fetch(
+      `http://localhost:4000/api/consultarAuditoria?tipoActividad=${tipoActividad}&fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`,
+      {
+        method: "GET",
+      },
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      mostrarAlerta("error", "Error al obtener registros", data.error);
+      setTipoActividad("");
+      setFechaInicio("");
+      setFechaFin("");
+      setResults([]);
+      setMostrarInfo([]);
+      return;
+    }
+
+    setResults(data);
+    setMostrarInfo([fechaInicio, fechaFin]);
+    setTipoActividad("");
+    setFechaInicio("");
+    setFechaFin("");
   };
+  const numResults = results.length;
   return (
     <div>
       <BotonTema />
@@ -107,8 +135,45 @@ function ConsultarActividad() {
             className="principales"
             onClick={handleConsultarActividades}
           >
-            consultar registro por fecha
+            consultar actividades
           </button>
+
+          {results.length > 0 ? (
+            <h4>
+              Lista actividades: Se encontraron {numResults} resultados entre
+              las fechas {mostarInfo[0]} y {mostarInfo[1]}
+            </h4>
+          ) : (
+            ""
+          )}
+
+          {results.length > 0 ? (
+            <ul className="listas">
+              {results.map((actividad) => (
+                <li key={actividad.idactividad_sistema}>
+                  <p className="fila">
+                    <strong>Fecha y hora:</strong>
+                    <span>
+                      {new Date(actividad.fecha).toLocaleString("es-ES", {
+                        year: "numeric",
+                        month: "2-digit",
+                        day: "2-digit",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: false,
+                      })}
+                    </span>
+                  </p>
+                  <p className="fila">
+                    <strong>Detalles:</strong>
+                    <span>{actividad.detalles}</span>
+                  </p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            ""
+          )}
         </section>
         <Footer />
       </div>

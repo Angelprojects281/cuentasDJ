@@ -21,6 +21,8 @@ const {
 
 const { CrearRegistro } = require("../controladores/nuevoRegistro");
 
+const { consultarAuditoria } = require("../controladores/consultarAuditoria");
+
 // ruta login
 router.post("/login", login);
 
@@ -48,5 +50,9 @@ router.get("/consultarRegistro/", consultarRegistro);
 //ruta eliminar registro
 
 router.delete("/eliminarRegistro/:idProduccion", eliminarReg);
+
+// ruta consultar auditoria
+
+router.get("/consultarAuditoria", consultarAuditoria);
 
 module.exports = router;

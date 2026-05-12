@@ -6,6 +6,7 @@ const dbAuditoria = mysql.createConnection({
   user: "root",
   password: "sqlCuentasdj",
   database: "auditoria",
+  timezone: `local`,
 });
 
 // Conexión a la base de datos y manejo de errores

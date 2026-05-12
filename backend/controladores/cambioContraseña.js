@@ -87,7 +87,7 @@ const cambiarcontrasena = async (req, res) => {
           await enviarCorreo(codigo, user.idUsuarios, user.Rol);
           CrearRegistroAuditoria(
             "codigo_verificacion",
-            `se envio un codigo de verificacion para el usuarios ${idUsuarios}`,
+            `se envio un codigo de verificacion para el usuario ${idUsuarios}`,
           );
           return res.json({
             message: "Código de verificación enviado al correo",

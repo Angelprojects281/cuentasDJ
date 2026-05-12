@@ -6,6 +6,7 @@ const dbProduccion = mysql.createConnection({
   user: "root",
   password: "sqlCuentasdj",
   database: "cuentasdj",
+  timezone: `local`,
 });
 
 // Conexión a la base de datos y manejo de errores

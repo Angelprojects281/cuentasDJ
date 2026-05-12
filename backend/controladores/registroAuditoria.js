@@ -2,7 +2,7 @@
 
 function CrearRegistroAuditoria(tipo_actividad, detalles) {
   const dbAuditoria = require("../config/dbAuditoria");
-  const fechaActual = new Date().toISOString().replace(`T`, ` `).slice(0, 19);
+  const fechaActual = new Date();
   const query =
     "INSERT INTO auditoria.actividad_sistema (fecha, tipo_actividad, detalles) VALUES (?,?,?)";
 
