@@ -132,8 +132,10 @@ const CrearRegistro = async (req, res) => {
         ]);
     }
 
-    CrearRegistro("nuevo_registro", "se realizo un nuevo registro");
-
+    await CrearRegistroAuditoria(
+      "nuevo_registro",
+      "se realizo un nuevo registro",
+    );
     return res.status(201).json({ message: "Registro creado exitosamente" });
   } catch (error) {
     return res.status(500).json({
