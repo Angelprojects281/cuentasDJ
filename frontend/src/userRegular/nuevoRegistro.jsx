@@ -78,7 +78,7 @@ function NuevoRegistro() {
         return;
       }
 
-      const res = await fetch("http://localhost:4000/api/crearRegistro", {
+      const res = await fetch(`${import.meta.env.VITE_API}/crearRegistro`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

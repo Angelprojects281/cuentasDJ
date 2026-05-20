@@ -58,7 +58,7 @@ function NuevoUsuario() {
         return;
       }
 
-      const res = await fetch("http://localhost:4000/api/crearUsuario", {
+      const res = await fetch(`${import.meta.env.VITE_API}/crearUsuario`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

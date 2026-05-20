@@ -162,11 +162,11 @@ Este servidor se encarga de renderizar toda la parte del frontend, hacer los lla
 
 ## configuracion del servidor frontend
 
-Este servidor utiliza la configuracion predeterminada de `create-react-app` el cual se lanza por defecto en el puerto 3000 con la URL `
+Este servidor fue migrado a vite el cual se lanza en el puerto 3000 con la URL `
   Local:            http://localhost:3000`.
 
-Para inicializar el servidor vamos a PowerShell o cualquier consola de comandos, y nos ubicamos en la ruta ` ../cuentasdjreact/frontend` y ya ubicados ejecutamos el comando `npm start`.
-Si todo salio bien aparecera en consola un mensaje de confirmacion que dice `webpack compiled successfully`.
+Para inicializar el servidor vamos a PowerShell o cualquier consola de comandos, y nos ubicamos en la ruta ` ../cuentasdjreact/frontend` y ya ubicados ejecutamos el comando `npm run dev`.
+Si todo salio bien aparecera en consola un mensaje de confirmacion que dice ` VITE v8.0.13  ready in 157 ms` o similar.
 
 ## configuracion del servidor backend
 

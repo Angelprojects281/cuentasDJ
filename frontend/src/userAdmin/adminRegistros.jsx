@@ -41,7 +41,7 @@ function AdminRegistros() {
         return;
       }
       const res = await fetch(
-        `http://localhost:4000/api/consultarRegistro?turno=${turno}&fecha=${fecha}`,
+        `${import.meta.env.VITE_API}/consultarRegistro?turno=${turno}&fecha=${fecha}`,
         {
           method: "GET",
         },
@@ -96,7 +96,7 @@ function AdminRegistros() {
 
     const idProduccion = produccion.idProduccion;
     const res = await fetch(
-      `http://localhost:4000/api/eliminarRegistro/${idProduccion}`,
+      `${import.meta.env.VITE_API}/eliminarRegistro/${idProduccion}`,
       {
         method: "DELETE",
       },

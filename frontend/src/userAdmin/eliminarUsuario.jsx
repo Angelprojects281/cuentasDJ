@@ -19,7 +19,7 @@ function BuscarEliminar() {
   const obtenerUsuarios = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:4000/api/listarUsuarios", {
+      const res = await fetch(`${import.meta.env.VITE_API}/listarUsuarios`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -63,7 +63,7 @@ function BuscarEliminar() {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(
-        `http://localhost:4000/api/usuario/${usuarioSeleccionado}`,
+        `${import.meta.env.VITE_API}/usuario/${usuarioSeleccionado}`,
         {
           method: "DELETE",
           headers: {

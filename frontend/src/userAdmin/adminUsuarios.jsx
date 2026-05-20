@@ -15,7 +15,7 @@ function AdminUsuarios() {
 
   const obtenerUsuarios = async () => {
     try {
-      const res = await fetch("http://localhost:4000/api/listarUsuarios");
+      const res = await fetch(`${import.meta.env.VITE_API}/listarUsuarios`);
 
       const data = await res.json();
 

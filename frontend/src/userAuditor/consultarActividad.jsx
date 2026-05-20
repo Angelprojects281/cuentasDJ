@@ -19,7 +19,7 @@ function ConsultarActividad() {
     "-" +
     String(new Date().getDate()).padStart(2, "0");
   const [results, setResults] = useState([]);
-  const [mostarInfo, setMostrarInfo] = useState([]);
+  const [mostrarInfo, setMostrarInfo] = useState([]);
 
   const handleConsultarActividades = async () => {
     if (!tipoActividad || !fechaInicio || !fechaFin) {
@@ -50,7 +50,7 @@ function ConsultarActividad() {
     }
 
     const res = await fetch(
-      `http://localhost:4000/api/consultarAuditoria?tipoActividad=${tipoActividad}&fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`,
+      `${import.meta.env.VITE_API}/consultarAuditoria?tipoActividad=${tipoActividad}&fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`,
       {
         method: "GET",
       },
@@ -141,7 +141,7 @@ function ConsultarActividad() {
           {results.length > 0 ? (
             <h4>
               Lista actividades: Se encontraron {numResults} resultados entre
-              las fechas {mostarInfo[0]} y {mostarInfo[1]}
+              las fechas {mostrarInfo[0]} y {mostrarInfo[1]}
             </h4>
           ) : (
             ""

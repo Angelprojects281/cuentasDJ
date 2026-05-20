@@ -40,7 +40,7 @@ function CambiarContraseña() {
         return;
       }
 
-      const res = await fetch("http://localhost:4000/api/cambiarcontrasena", {
+      const res = await fetch(`${import.meta.env.VITE_API}/cambiarcontrasena`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,7 +77,7 @@ function CambiarContraseña() {
   //espera la confirmacion de codigo del backend y si la validacion es correcta informa para que se realice el cambio
   const handleCambiarContraseña = async () => {
     try {
-      const res = await fetch("http://localhost:4000/api/verificarCodigo", {
+      const res = await fetch(`${import.meta.env.VITE_API}/verificarCodigo`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
