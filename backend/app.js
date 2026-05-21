@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 // ruta de prueba
 app.get("/", (req, res) => {
   // Ruta de prueba para verificar que el backend funciona
-  res.send("Backend funcionando 🚀");
+  res.send("Backend funcionando");
 });
 
 // rutas API (DESPUÉS de middlewares)
