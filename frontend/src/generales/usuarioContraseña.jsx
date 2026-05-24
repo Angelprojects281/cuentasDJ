@@ -36,13 +36,11 @@ function UsuarioContraseña() {
       });
 
       const data = await res.json();
-      console.log(data);
 
       if (!res.ok) {
         mostrarAlerta("error", "Error al iniciar sesion", data.error);
         throw new Error(data.error || "Error al iniciar sesión");
       }
-      console.log("Inicio de sesión exitoso:", data);
 
       localStorage.setItem("token", data.token);
       const decodedToken = jwtDecode(data.token);

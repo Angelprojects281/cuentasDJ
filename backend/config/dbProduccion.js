@@ -12,10 +12,8 @@ const dbProduccion = mysql.createConnection({
 // Conexión a la base de datos y manejo de errores
 dbProduccion.connect((err) => {
   if (err) {
-    console.error("Error al conectar a la base de datos:", err);
     return;
   }
-  console.log("Conexión a la base de datos de produccion establecida");
 });
 
 module.exports = dbProduccion;

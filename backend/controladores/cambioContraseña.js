@@ -36,11 +36,11 @@ async function enviarCorreo(codigo, idUsuarios, Rol) {
     html: `<p>Tu código de verificación para el usuario <b>${idUsuarios}</b> con rol <b>${Rol}</b> es: <b>${codigo}</b>. Este código es válido por 15 minutos.</p>`,
   };
 
-  return transporter.sendMail(mailOptions);
+  return await transporter.sendMail(mailOptions);
 }
 
 // Función para manejar la solicitud de cambio de contraseña
-const cambiarcontrasena = async (req, res) => {
+const cambiarcontrasena = (req, res) => {
   const { idUsuarios, cNueva, confirmC } = req.body;
 
   if (!idUsuarios || !cNueva || !confirmC) {

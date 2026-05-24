@@ -7,13 +7,13 @@ const {
 } = require("../controladores/registroAuditoria");
 
 // Función para manejar el inicio de sesión
-const login = async (req, res) => {
+const login = (req, res) => {
   const { idUsuarios, contraseña } = req.body;
 
   const query = "SELECT * FROM usuarios WHERE BINARY idUsuarios = ?";
 
   // Consulta a la base de datos para verificar el usuario
-  db.query(query, [idUsuarios], async (err, results) => {
+  db.query(query, [idUsuarios], (err, results) => {
     if (err) {
       return res
         .status(500)

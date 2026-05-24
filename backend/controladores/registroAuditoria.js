@@ -8,9 +8,7 @@ function CrearRegistroAuditoria(tipo_actividad, detalles) {
 
   dbAuditoria.query(query, [fechaActual, tipo_actividad, detalles], (err) => {
     if (err) {
-      return res
-        .status(500)
-        .json({ error: "Error al insertar en la base de datos" });
+      throw err;
     }
   });
 }

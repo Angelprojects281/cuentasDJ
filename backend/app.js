@@ -28,7 +28,4 @@ app.use("/api", authRoutes); // Rutas de autenticación bajo el prefijo /api
 // puerto
 const PORT = 4000;
 
-app.listen(PORT, () => {
-  // Inicia el servidor y escucha en el puerto definido
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+app.listen(PORT, () => {});

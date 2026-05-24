@@ -21,7 +21,7 @@ const verificarToken = (req, res, next) => {
 };
 
 //listar todos los usuarios de la base de datos
-const listarUsuarios = async (req, res) => {
+const listarUsuarios = (req, res) => {
   const query = "SELECT idUsuarios, Rol FROM usuarios ORDER BY idUsuarios ASC";
 
   db.query(query, (err, results) => {
@@ -35,7 +35,7 @@ const listarUsuarios = async (req, res) => {
 };
 
 // Seleccionar usuario para eliminarlo con su iD y evitar eliminarse a si mismo
-const eliminarUsuario = async (req, res) => {
+const eliminarUsuario = (req, res) => {
   const { idUsuarios } = req.params;
 
   if (!idUsuarios) {

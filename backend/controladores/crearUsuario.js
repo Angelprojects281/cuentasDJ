@@ -5,7 +5,7 @@ const {
 } = require("../controladores/registroAuditoria");
 
 // Función para manejar la creación de un nuevo usuario
-const crearUsuario = async (req, res) => {
+const crearUsuario = (req, res) => {
   const { idUsuarios, cNueva, Rol } = req.body;
 
   if (!idUsuarios || !cNueva || !Rol) {

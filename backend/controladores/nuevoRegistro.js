@@ -118,7 +118,7 @@ const CrearRegistro = async (req, res) => {
     const queryBaches =
       "INSERT INTO bache (proveedor, lote, canecas_bache, kilos_bache, griego_entregado, entregado_kilos, idProduccion) VALUES (?,?,?,?,?,?,?)";
 
-    for (let bache of listaBaches) {
+    for (const bache of listaBaches) {
       await dbProduccion
         .promise()
         .query(queryBaches, [
