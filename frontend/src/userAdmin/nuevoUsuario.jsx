@@ -83,7 +83,7 @@ function NuevoUsuario() {
         "ya puede iniciar sesion con el nuevo usuario",
       );
       navigate("/principalAdmin");
-    } catch (error) {
+    } catch (_error) {
       mostrarAlerta("error", "Algo salio mal", "intente de nuevo mas tarde");
     }
   };

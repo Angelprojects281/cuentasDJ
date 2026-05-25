@@ -65,7 +65,7 @@ function AdminRegistros() {
       }
       setproduccion(results[0]);
       setbaches(resultsB);
-    } catch (error) {
+    } catch (_error) {
       mostrarAlerta(
         "error",
         "Algo salio mal",

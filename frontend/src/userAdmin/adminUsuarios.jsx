@@ -23,7 +23,7 @@ function AdminUsuarios() {
         mostrarAlerta("error", "Error al obtener usuario", data.error);
       }
       setUsuarios(data);
-    } catch (error) {
+    } catch (_error) {
       console.error("Error al obtener usuarios:", error);
     }
   };

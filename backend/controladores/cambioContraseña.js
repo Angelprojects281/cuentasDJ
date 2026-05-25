@@ -92,7 +92,7 @@ const cambiarcontrasena = (req, res) => {
           return res.json({
             message: "Código de verificación enviado al correo",
           });
-        } catch (mailError) {
+        } catch (_mailError) {
           return res.status(500).json({ error: "Error al enviar el correo" });
         }
       },

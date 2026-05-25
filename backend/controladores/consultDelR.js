@@ -30,8 +30,8 @@ const consultarRegistro = async (req, res) => {
       .query(queryBaches, [forenKey]);
 
     return res.json({ results, resultsB });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
+  } catch (_error) {
+    return res.status(500).json({ error: _error.message });
   }
 };
 
@@ -60,8 +60,8 @@ const eliminarReg = async (req, res) => {
     return res
       .status(201)
       .json({ message: "Registro eliminado correctamente" });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
+  } catch (_error) {
+    return res.status(500).json({ error: _error.message });
   }
 };
 

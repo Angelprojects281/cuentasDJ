@@ -22,8 +22,8 @@ const consultarAuditoria = async (req, res) => {
     }
 
     return res.json(results);
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
+  } catch (_error) {
+    return res.status(500).json({ error: _error.message });
   }
 };
 

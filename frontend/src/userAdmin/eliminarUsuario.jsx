@@ -31,7 +31,7 @@ function BuscarEliminar() {
         mostrarAlerta("error", "Error al obtener usuarios", data.error);
       }
       setUsuarios(data);
-    } catch (error) {
+    } catch (_error) {
       console.error("Error al obtener usuarios:", error);
     }
   };
@@ -84,7 +84,7 @@ function BuscarEliminar() {
         "el usuario se elimino correctamente",
       );
       navigate("/principalAdmin");
-    } catch (error) {
+    } catch (_error) {
       mostrarAlerta("error", "Algo salio mal", "intente nuevamente mas tarde");
     }
   };

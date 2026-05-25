@@ -65,7 +65,7 @@ function CambiarContraseña() {
         "El codigo a sido enviado al correo de administracion.",
       );
       setSeSolicitoCodigo(true);
-    } catch (error) {
+    } catch (_error) {
       mostrarAlerta(
         "error",
         "Error al solicitar el codigo",
@@ -102,7 +102,7 @@ function CambiarContraseña() {
       );
       navigate("/inicioSesion");
       localStorage.removeItem("token");
-    } catch (error) {
+    } catch (_error) {
       mostrarAlerta(
         "error",
         "Error al cambiar la contraseña",

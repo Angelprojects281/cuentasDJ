@@ -137,9 +137,9 @@ const CrearRegistro = async (req, res) => {
       "se realizo un nuevo registro",
     );
     return res.status(201).json({ message: "Registro creado exitosamente" });
-  } catch (error) {
+  } catch (_error) {
     return res.status(500).json({
-      error: error.message,
+      error: _error.message,
       sqlMessage: error.sqlMessage,
     });
   }

@@ -120,7 +120,7 @@ function NuevoRegistro() {
       setcdEntregadas(0);
       setcaEntregadas(0);
       setlistaBaches([]);
-    } catch (error) {
+    } catch (_error) {
       mostrarAlerta("Algo salio mal, intente mas tarde");
     }
   };
