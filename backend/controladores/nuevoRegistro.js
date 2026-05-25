@@ -140,7 +140,7 @@ const CrearRegistro = async (req, res) => {
   } catch (_error) {
     return res.status(500).json({
       error: _error.message,
-      sqlMessage: error.sqlMessage,
+      sqlMessage: _error.sqlMessage,
     });
   }
 };
