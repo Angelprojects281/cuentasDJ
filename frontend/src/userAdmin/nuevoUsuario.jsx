@@ -64,9 +64,9 @@ function NuevoUsuario() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          idUsuarios: idUsuarios,
-          cNueva: cNueva,
-          Rol: Rol,
+          idUsuarios,
+          cNueva,
+          Rol,
         }),
       });
 

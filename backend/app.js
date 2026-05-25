@@ -28,4 +28,4 @@ app.use("/api", authRoutes); // Rutas de autenticación bajo el prefijo /api
 // puerto
 const PORT = 4000;
 
-app.listen(PORT, () => {});
+app.listen(PORT);

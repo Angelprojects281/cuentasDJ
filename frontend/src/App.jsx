@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
 import { useIdleTimer } from "react-idle-timer";
 import ProteccionRutas from "./reutilizables/proteccionRutas";
+import { mostrarAlerta } from "./reutilizables/alertas";
 
 import Inicio from "./inicio/inicio";
 import InicioSesion from "./generales/usuarioContraseña";
@@ -25,7 +26,11 @@ function App() {
     } else {
       localStorage.removeItem("token");
       window.location.href = "/inicioSesion";
-      alert("Has sido desconectado por inactividad");
+      mostrarAlerta(
+        "info",
+        "Sesión cerrada",
+        "Has sido desconectado por inactividad",
+      );
     }
   };
   useIdleTimer({

@@ -46,9 +46,9 @@ function CambiarContraseña() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          idUsuarios: idUsuarios,
-          cNueva: cNueva,
-          confirmC: confirmC,
+          idUsuarios,
+          cNueva,
+          confirmC,
         }),
       });
 
@@ -83,8 +83,8 @@ function CambiarContraseña() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          idUsuarios: idUsuarios,
-          codigo: codigo,
+          idUsuarios,
+          codigo,
         }),
       });
 

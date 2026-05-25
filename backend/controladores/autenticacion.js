@@ -46,7 +46,7 @@ const login = (req, res) => {
     res.json({
       message: "Inicio de sesión exitoso",
       user: { idUsuarios: user.idUsuarios, rol: user.Rol },
-      token: token,
+      token,
     });
   });
 };
