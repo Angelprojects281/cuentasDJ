@@ -24,7 +24,7 @@ function AdminUsuarios() {
       }
       setUsuarios(data);
     } catch (_error) {
-      console.error("Error al obtener usuarios:", error);
+      console.error("Error al obtener usuarios:", _error);
     }
   };
   useEffect(() => {

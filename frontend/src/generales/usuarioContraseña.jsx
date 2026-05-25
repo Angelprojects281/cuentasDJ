@@ -53,7 +53,7 @@ function UsuarioContraseña() {
         navigate({ replace: true, pathname: "/principalAuditor" });
       }
     } catch (_error) {
-      console.error("Error al iniciar sesión:", error);
+      console.error("Error al iniciar sesión:", _error);
     }
   };
 
