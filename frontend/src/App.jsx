@@ -114,12 +114,8 @@ function App() {
           />
           <Route
             path="/consultarActividad"
-            element={
-              <ProteccionRutas
-                pagina={<ConsultarActividad />}
-                rolPermitido="auditor"
-              />
-            }
+            element={<ProteccionRutas pagina={<ConsultarActividad />} />}
+            rolPermitido="auditor"
           />
         </Routes>
       </BrowserRouter>

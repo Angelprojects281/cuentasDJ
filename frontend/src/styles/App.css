@@ -34,6 +34,17 @@
   --tema_color: #ffffff;
 }
 
+@keyframes Entrance {
+  from {
+    opacity: 0;
+    transform: scale(0.5) translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+  }
+}
+
 .botonDesabilitado {
   background: #3b4252 !important;
 }
@@ -81,6 +92,7 @@ body {
   max-width: 200px;
   height: auto;
   filter: var(--filter_img);
+  animation: Entrance 0.5s ease-in;
 }
 
 #detallesProduccion {
@@ -180,6 +192,7 @@ select {
   outline: none;
   box-shadow: 0px 2px 3px inset#000000;
   transition: outline 0.2s ease;
+  animation: Entrance 0.5s ease-out;
 }
 
 input:focus,
@@ -195,6 +208,7 @@ select:focus {
   text-transform: uppercase;
   box-shadow: 0px 2px 5px #000000;
   color: white;
+  animation: Entrance 0.5s ease-out;
 }
 
 button:not(.tema) {
@@ -208,7 +222,7 @@ button:not(.tema) {
   box-shadow: 0px 3px 5px #000000;
   color: white;
   border: none;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease-out;
 }
 
 .principales {
@@ -216,10 +230,12 @@ button:not(.tema) {
   justify-content: center;
   align-items: center;
   background: var(--principales);
+  animation: Entrance 0.5s ease-out;
 }
 
 .secundarios {
   background: var(--secundarios);
+  animation: Entrance 0.5s ease-out;
 }
 
 .tema {
@@ -234,6 +250,7 @@ button:not(.tema) {
   font-size: 12px;
   display: grid;
   color: var(--text_color);
+  animation: Entrance 0.5s ease-out;
 }
 
 .listas {
