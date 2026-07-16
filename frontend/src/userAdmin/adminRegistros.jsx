@@ -264,7 +264,7 @@ function AdminRegistros() {
                         <span>{bache.kilos_bache}</span>
                       </p>
                       <p className="fila">
-                        <strong>Grego entregado a planta:</strong>
+                        <strong>Griego entregado a planta:</strong>
                         <span>{bache.griego_entregado}</span>
                       </p>
                       <p className="fila">

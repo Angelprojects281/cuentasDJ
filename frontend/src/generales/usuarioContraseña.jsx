@@ -22,7 +22,7 @@ function UsuarioContraseña() {
       if (!idUsuarios || !contraseña) {
         mostrarAlerta(
           "error",
-          "Error al iniciar sesion",
+          "Error al iniciar sesión",
           "Debes ingresar todos los datos requeridos",
         );
         return;
@@ -38,7 +38,7 @@ function UsuarioContraseña() {
       const data = await res.json();
 
       if (!res.ok) {
-        mostrarAlerta("error", "Error al iniciar sesion", data.error);
+        mostrarAlerta("error", "Error al iniciar sesión", data.error);
         throw new Error(data.error || "Error al iniciar sesión");
       }
 
@@ -91,10 +91,10 @@ function UsuarioContraseña() {
             className="principales"
             onClick={handleLogin}
           >
-            iniciar sesion
+            Iniciar sesión
           </button>
           <Link to="/cambiarContraseña" id="recuperacion">
-            ¿olvidaste tu contraseña?
+            ¿Olvidaste tu contraseña?
           </Link>
           <p></p>
         </section>

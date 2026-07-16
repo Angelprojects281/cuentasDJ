@@ -27,7 +27,7 @@ function ConsultarActividad() {
         mostrarAlerta(
           "warning",
           "No se pudo realizar la consulta",
-          "faltan campos requeridos",
+          "Faltan campos requeridos",
         );
         return;
       }
@@ -36,7 +36,7 @@ function ConsultarActividad() {
         mostrarAlerta(
           "error",
           "Error al realizar la consulta",
-          "la fecha de inicio no puede ser mayor a la fecha de fin",
+          "La fecha de inicio no puede ser mayor que la fecha de fin",
         );
         return;
       }
@@ -45,7 +45,7 @@ function ConsultarActividad() {
         mostrarAlerta(
           "error",
           "Error al realizar la consulta",
-          "asegurate que las fechas no sean mayores a la actual",
+          "Asegúrate de que las fechas no sean mayores que la actual",
         );
         return;
       }
@@ -103,20 +103,20 @@ function ConsultarActividad() {
               value={tipoActividad}
             >
               <option value={""}>-- Seleccione el tipo de actividad</option>
-              <option value={"inicio_sesion"}>Inicios de sesion</option>
+              <option value={"inicio_sesion"}>Inicios de sesión</option>
               <option value={"codigo_verificacion"}>
-                Codigos de verificacion generados
+                Códigos de verificación generados
               </option>
               <option value={"cambio_contraseña"}>Cambios de contraseña</option>
               <option value={"nuevo_registro"}>Nuevos registros</option>
               <option value={"eliminar_registro"}>
-                Eliminacion de registros
+                Eliminación de registros
               </option>
               <option value={"nuevo_usuario"}>
-                Creacion de nuevos usuarios
+                Creación de nuevos usuarios
               </option>
               <option value={"eliminar_usuario"}>
-                Eliminacion de usuarios
+                Eliminación de usuarios
               </option>
             </select>
           </label>
@@ -144,7 +144,7 @@ function ConsultarActividad() {
             className="principales"
             onClick={handleConsultarActividades}
           >
-            consultar actividades
+            Consultar actividades
           </button>
 
           {results.length > 0 ? (

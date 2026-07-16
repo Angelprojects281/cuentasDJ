@@ -42,7 +42,7 @@ function AdminUsuarios() {
         </header>
         <Header2 />
         <section id="content">
-          <h4>lista de usuarios: </h4>
+          <h4>Lista de usuarios:</h4>
           {/*mapeo de la lista de usuario devuelta por el backend*/}
           <ul className="listas" id="listaUsuarios">
             {usuarios.map((usuarios, index) => (
@@ -53,12 +53,12 @@ function AdminUsuarios() {
           </ul>
           <Link to="/nuevoUsuario">
             <button id="nuevoUser" className="principales">
-              nuevo usuario
+              Nuevo usuario
             </button>
           </Link>
           <Link to="/eliminarUsuario">
             <button id="delUser" className="secundarios">
-              eliminar usuario
+              Eliminar usuario
             </button>
           </Link>
         </section>

@@ -29,8 +29,8 @@ function NuevoRegistro() {
     if (proveedor === "vacio" || !lote || !canecas) {
       mostrarAlerta(
         "warning",
-        "No se puede registrar la informacion",
-        "faltan campos requeridos",
+        "No se puede registrar la información",
+        "Faltan campos requeridos",
       );
       return;
     }
@@ -70,8 +70,8 @@ function NuevoRegistro() {
 
       const result = await mostrarConfirmacion(
         "question",
-        "¿quieres enviar este registro?",
-        "verifica la informacion nuevamente si es necesario",
+        "¿Quieres enviar este registro?",
+        "Verifica la información nuevamente si es necesario",
       );
 
       if (!result.isConfirmed) {
@@ -107,7 +107,7 @@ function NuevoRegistro() {
       mostrarAlerta(
         "success",
         "Registro creado correctamente",
-        "el registro se guardo exitosamente",
+        "El registro se guardó correctamente",
       );
       setturno("");
       setfecha("");
@@ -143,7 +143,7 @@ function NuevoRegistro() {
               onChange={(e) => setturno(e.target.value)}
               value={turno}
             >
-              <option value={""}>-- seleccione su turno</option>
+              <option value={""}>-- Seleccione su turno</option>
               <option value={"Turno 1"}>Turno 1</option>
               <option value={"Turno 2"}>Turno 2</option>
             </select>
@@ -246,7 +246,7 @@ function NuevoRegistro() {
               onChange={(e) => setproveedor(e.target.value)}
               value={proveedor}
             >
-              <option value={"vacio"}>-- seleccione proveedor</option>
+              <option value={"vacio"}>-- Seleccione proveedor</option>
               <option value={"RR"}>RR</option>
               <option value={"SBQ"}>SBQ</option>
               <option value={"STA"}>STA</option>
@@ -279,16 +279,16 @@ function NuevoRegistro() {
               className="principales"
               onClick={handleRegistrarBache}
             >
-              añadir
+              Añadir
             </button>
             <button
               id="eliminarBache"
               className="secundarios"
               onClick={handleEliminarBache}
             >
-              Eliminar ultimo bache
+              Eliminar último bache
             </button>
-            {listaBaches.length > 0 && <h4>lista de baches: </h4>}
+            {listaBaches.length > 0 && <h4>Lista de baches:</h4>}
             <ul className="listas">
               {listaBaches.map((bache, index) => (
                 <li key={index}>
@@ -307,7 +307,7 @@ function NuevoRegistro() {
             className="principales"
             onClick={HacerRegistro}
           >
-            registrar informacion
+            Registrar información
           </button>
         </section>
         <Footer />

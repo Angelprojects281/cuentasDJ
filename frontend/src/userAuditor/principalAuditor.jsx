@@ -29,7 +29,7 @@ function PrincipalAuditor() {
           </Link>
 
           <button id="cerrarSesion" className="secundarios" onClick={logOut}>
-            cerrar sesion
+            Cerrar sesión
           </button>
         </section>
         <Footer />

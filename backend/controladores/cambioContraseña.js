@@ -87,7 +87,7 @@ const cambiarcontrasena = (req, res) => {
           await enviarCorreo(codigo, user.idUsuarios, user.Rol);
           CrearRegistroAuditoria(
             "codigo_verificacion",
-            `se envio un codigo de verificacion para el usuario ${idUsuarios}`,
+            `Se envió un código de verificación para el usuario ${idUsuarios}`,
           );
           return res.json({
             message: "Código de verificación enviado al correo",
@@ -140,7 +140,7 @@ const verificarCodigoCambiocontrasena = (req, res) => {
         if (err) {
           return res
             .status(400)
-            .json({ error: "Error al limpiar el codigo expirado" });
+            .json({ error: "Error al limpiar el código expirado" });
         }
 
         return res
@@ -157,9 +157,9 @@ const verificarCodigoCambiocontrasena = (req, res) => {
       }
       CrearRegistroAuditoria(
         "cambio_contraseña",
-        `contraseña cambiada para el usuario ${idUsuarios}`,
+        `Contraseña cambiada para el usuario ${idUsuarios}`,
       );
-      return res.json({ message: "contraseña actualizada correctamente" });
+      return res.json({ message: "Contraseña actualizada correctamente" });
     });
   });
 };

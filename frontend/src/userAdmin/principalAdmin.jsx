@@ -24,24 +24,24 @@ function PrincipalAdmin() {
           <p>Panel de administrador:</p>
           <Link to="/adminUsuarios">
             <button id="consultarU" className="principales">
-              consultar usuarios
+              Consultar usuarios
             </button>
           </Link>
 
           <Link to="/adminRegistros">
             <button id="consultarR" className="principales">
-              consultar registros
+              Consultar registros
             </button>
           </Link>
 
           <Link to="/cambiarContraseña">
             <button id="cambiarC" className="principales">
-              cambiar contraseña
+              Cambiar contraseña
             </button>
           </Link>
 
           <button id="cerrarSesion" className="secundarios" onClick={logOut}>
-            cerrar sesion
+            Cerrar sesión
           </button>
         </section>
         <Footer />

@@ -24,12 +24,12 @@ function PrincipalRegular() {
           <p>Panel de usuario regular:</p>
           <Link to="/nuevoRegistro">
             <button id="nuevoRegistro" className="principales">
-              nuevo registro
+              Nuevo registro
             </button>
           </Link>
 
           <button id="cerrarSesion" className="secundarios" onClick={logOut}>
-            cerrar sesion
+            Cerrar sesión
           </button>
         </section>
         <Footer />

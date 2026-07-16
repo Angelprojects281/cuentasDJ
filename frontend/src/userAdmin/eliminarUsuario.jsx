@@ -44,8 +44,8 @@ function BuscarEliminar() {
     if (!usuarioSeleccionado) {
       mostrarAlerta(
         "warning",
-        "Error de eliminacion",
-        "por favor seleccione un usuario valido",
+        "Error de eliminación",
+        "Por favor seleccione un usuario válido",
       );
       return;
     }
@@ -53,7 +53,7 @@ function BuscarEliminar() {
     const result = await mostrarConfirmacion(
       "question",
       "¿Deseas eliminar a este usuario?",
-      "revisa nuevamense la informacion si es necesario",
+      "Revise nuevamente la información si es necesario",
     );
 
     if (!result.isConfirmed) {
@@ -81,7 +81,7 @@ function BuscarEliminar() {
       mostrarAlerta(
         "success",
         "Usuario eliminado correctamente",
-        "el usuario se elimino correctamente",
+        "El usuario se eliminó correctamente",
       );
       navigate("/principalAdmin");
     } catch (_error) {
@@ -126,7 +126,7 @@ function BuscarEliminar() {
             className="secundarios"
             onClick={() => window.history.back()}
           >
-            cancelar
+            Cancelar
           </button>
         </section>
         <Footer />

@@ -41,7 +41,7 @@ const login = (req, res) => {
     );
     CrearRegistroAuditoria(
       "inicio_sesion",
-      `Inicio de sesion para el usuario ${idUsuarios}`,
+      `Inicio de sesión para el usuario ${idUsuarios}`,
     );
     res.json({
       message: "Inicio de sesión exitoso",

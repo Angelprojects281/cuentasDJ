@@ -39,7 +39,7 @@ const crearUsuario = (req, res) => {
       }
       CrearRegistroAuditoria(
         "nuevo_usuario",
-        `se creo un nuevo usuario con nombre ${idUsuarios} y con rol ${Rol}`,
+        `Se creó un nuevo usuario con nombre ${idUsuarios} y con rol ${Rol}`,
       );
       return res.json({ message: "Usuario creado exitosamente" });
     });

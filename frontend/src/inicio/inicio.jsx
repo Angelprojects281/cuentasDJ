@@ -18,13 +18,13 @@ function Inicio() {
 
         <section id="content">
           <p>
-            Bienvenido al sistema de Cuentas DJ, de click al boton para iniciar
-            sesion⬇️:
+            Bienvenido al sistema de Cuentas DJ. Haz clic en el botón para
+            iniciar sesión ⬇️:
           </p>
 
           <Link to="/inicioSesion">
             <button id="sesion" className="principales">
-              iniciar sesion
+              Iniciar sesión
             </button>
           </Link>
         </section>

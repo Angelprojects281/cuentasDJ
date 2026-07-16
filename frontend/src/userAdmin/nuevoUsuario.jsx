@@ -34,7 +34,7 @@ function NuevoUsuario() {
         mostrarAlerta(
           "warning",
           "Contraseña insegura",
-          "La contraseña debe tener minimo 8 caracteres incluyendo numeros y simbolos",
+          "La contraseña debe tener mínimo 8 caracteres, incluyendo números y símbolos",
         );
         return;
       }
@@ -43,7 +43,7 @@ function NuevoUsuario() {
         mostrarAlerta(
           "warning",
           "No se pudo crear el usuario",
-          "Seleccione un rol para el usuario",
+          "Selecciona un rol para el usuario",
         );
         return;
       }
@@ -51,7 +51,7 @@ function NuevoUsuario() {
       const result = await mostrarConfirmacion(
         "question",
         "¿Confirma que desea crear este usuario?",
-        "dale confirmar para crear el usuario",
+        "Pulse confirmar para crear el usuario",
       );
 
       if (!result.isConfirmed) {
@@ -80,7 +80,7 @@ function NuevoUsuario() {
       mostrarAlerta(
         "success",
         "Usuario creado correctamente",
-        "ya puede iniciar sesion con el nuevo usuario",
+        "Ya puede iniciar sesión con el nuevo usuario",
       );
       navigate("/principalAdmin");
     } catch (_error) {
@@ -102,7 +102,7 @@ function NuevoUsuario() {
           <p>Ingrese los datos del usuario:</p>
           <p>Rol:</p>
           <select name="rol" id="rol" onChange={(e) => setRol(e.target.value)}>
-            <option value="vacio">selecciona un rol</option>
+            <option value="vacio">Selecciona un rol</option>
             <option value="admin">administrador</option>
             <option value="regular">regular</option>
             <option value="auditor">auditor</option>
@@ -132,7 +132,7 @@ function NuevoUsuario() {
             className="principales"
             onClick={handleCrearUsuario}
           >
-            confirmar
+            Confirmar
           </button>
 
           <button
@@ -140,7 +140,7 @@ function NuevoUsuario() {
             className="secundarios"
             onClick={() => window.history.back()}
           >
-            cancelar
+            Cancelar
           </button>
         </section>
         <Footer />

@@ -35,7 +35,7 @@ function CambiarContraseña() {
         mostrarAlerta(
           "warning",
           "Contraseña insegura",
-          "La contraseña debe contener al menos 8 caracteres incluyendo numeros y simbolos",
+          "La contraseña debe contener al menos 8 caracteres, incluyendo números y símbolos",
         );
         return;
       }
@@ -61,8 +61,8 @@ function CambiarContraseña() {
 
       mostrarAlerta(
         "info",
-        "Codigo enviado correctamente",
-        "El codigo a sido enviado al correo de administracion.",
+        "Código enviado correctamente",
+        "El código ha sido enviado al correo de administración.",
       );
       setSeSolicitoCodigo(true);
     } catch (_error) {
@@ -98,7 +98,7 @@ function CambiarContraseña() {
       mostrarAlerta(
         "success",
         "Contraseña cambiada correctamente",
-        "Ya puede iniciar sesion con su nueva contraseña",
+        "Ya puede iniciar sesión con su nueva contraseña",
       );
       navigate("/inicioSesion");
       localStorage.removeItem("token");
@@ -150,7 +150,7 @@ function CambiarContraseña() {
           <input
             type="text"
             id="cVerificacion"
-            placeholder="codigo de verificación"
+            placeholder="código de verificación"
             value={codigo}
             onChange={(e) => setCVerificacion(e.target.value)}
           ></input>
@@ -161,7 +161,7 @@ function CambiarContraseña() {
             onClick={handleSolicitarCodigo}
             disabled={seSolicitoCodigo}
           >
-            Solicitar codigo
+            Solicitar código
           </button>
 
           <button
@@ -180,7 +180,7 @@ function CambiarContraseña() {
               navigate("/inicioSesion");
             }}
           >
-            cancelar
+            Cancelar
           </button>
         </section>
         <Footer />
