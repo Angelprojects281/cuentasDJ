@@ -1,12 +1,12 @@
 // funcion para crear un nuevo registro de auditoria
 
 function CrearRegistroAuditoria(tipo_actividad, detalles) {
-  const dbAuditoria = require("../config/dbAuditoria");
+  const db = require("../config/db");
   const fechaActual = new Date();
   const query =
-    "INSERT INTO auditoria.actividad_sistema (fecha, tipo_actividad, detalles) VALUES (?,?,?)";
+    "INSERT INTO actividad_sistema (fecha, tipo_actividad, detalles) VALUES (?,?,?)";
 
-  dbAuditoria.query(query, [fechaActual, tipo_actividad, detalles], (err) => {
+  db.query(query, [fechaActual, tipo_actividad, detalles], (err) => {
     if (err) {
       throw err;
     }

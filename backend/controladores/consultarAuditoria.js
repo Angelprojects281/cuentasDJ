@@ -1,4 +1,4 @@
-const dbAuditoria = require("../config/dbAuditoria");
+const db = require("../config/db");
 
 const consultarAuditoria = async (req, res) => {
   try {
@@ -11,7 +11,7 @@ const consultarAuditoria = async (req, res) => {
     const query =
       "SELECT * FROM actividad_sistema WHERE tipo_actividad = ? AND fecha BETWEEN ? AND ?";
 
-    const [results] = await dbAuditoria
+    const [results] = await db
       .promise()
       .query(query, [tipoActividad, fechaInicioFormat, fechaFinFormat]);
 

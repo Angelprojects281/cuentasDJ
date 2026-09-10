@@ -1,4 +1,4 @@
-const dbProduccion = require("../config/dbProduccion");
+const db = require("../config/db");
 const {
   rindeUtilizado,
   kilosBacheT,
@@ -86,7 +86,7 @@ const CrearRegistro = async (req, res) => {
     const querySelectR =
       "SELECT turno, fecha_prod FROM produccion WHERE turno= ? AND fecha_prod= ?";
 
-    const [results] = await dbProduccion
+    const [results] = await db
       .promise()
       .query(querySelectR, [turno, fechaFormat]);
 
@@ -96,7 +96,7 @@ const CrearRegistro = async (req, res) => {
       });
     }
 
-    const [result] = await dbProduccion
+    const [result] = await db
       .promise()
       .query(query, [
         turno,
@@ -119,7 +119,7 @@ const CrearRegistro = async (req, res) => {
       "INSERT INTO bache (proveedor, lote, canecas_bache, kilos_bache, griego_entregado, entregado_kilos, idProduccion) VALUES (?,?,?,?,?,?,?)";
 
     for (const bache of listaBaches) {
-      await dbProduccion
+      await db
         .promise()
         .query(queryBaches, [
           bache.proveedor,

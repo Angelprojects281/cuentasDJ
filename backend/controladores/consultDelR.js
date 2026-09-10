@@ -1,4 +1,4 @@
-const dbProduccion = require("../config/dbProduccion");
+const db = require("../config/db");
 const {
   CrearRegistroAuditoria,
 } = require("../controladores/registroAuditoria");
@@ -11,7 +11,7 @@ const consultarRegistro = async (req, res) => {
     const queryProduccion =
       "SELECT * FROM produccion WHERE turno= ? AND fecha_prod= ? ";
 
-    const [results] = await dbProduccion
+    const [results] = await db
       .promise()
       .query(queryProduccion, [turno, fechaFormat]);
 
@@ -25,9 +25,7 @@ const consultarRegistro = async (req, res) => {
 
     const queryBaches = "SELECT * FROM bache WHERE idProduccion = ?";
 
-    const [resultsB] = await dbProduccion
-      .promise()
-      .query(queryBaches, [forenKey]);
+    const [resultsB] = await db.promise().query(queryBaches, [forenKey]);
 
     return res.json({ results, resultsB });
   } catch (_error) {
@@ -42,15 +40,11 @@ const eliminarReg = async (req, res) => {
 
     const queryDelBch = "DELETE FROM bache WHERE idProduccion = ?";
 
-    const [results] = await dbProduccion
-      .promise()
-      .query(queryDelBch, [idProduccion]);
+    const [results] = await db.promise().query(queryDelBch, [idProduccion]);
 
     const queryDelProd = " DELETE FROM produccion WHERE idProduccion = ?";
 
-    const [results2] = await dbProduccion
-      .promise()
-      .query(queryDelProd, [idProduccion]);
+    const [results2] = await db.promise().query(queryDelProd, [idProduccion]);
 
     CrearRegistroAuditoria(
       "eliminar_registro",

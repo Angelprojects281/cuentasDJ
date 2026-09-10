@@ -1,469 +1,444 @@
-# Este README esta disponible en español e ingles, diciendo esto el proyecto esta comentado en estañol, se recomienda usar la extencion de VS "Comment Translate" para traducir los comentarios.
+# CuentasDJ
 
-# This README is available in Spanish and English; however, since the project is commented in Spanish, we recommend using the VS extension "Comment Translate" to translate the comments.
+Sistema web de gestión de usuarios, producción y auditoría para una empresa de alimentos. Este repositorio contiene el proyecto completo: **frontend en React**, **backend en Node.js/Express** y **esquema SQL en MySQL**.
 
-##### En español.
-
-# Proyecto CuentasDJ
-
-## Contexto del proyecto:
-
-- este proyecto es un proyecto de practica que utiliza tecnologias como React, NODEjs, y MySQL, pretende simular un sistemas de gestion de cuentas y usuarios para una empresa de alimentos. con el fin de no solo gestionar las cuentas sino tambien tener un sistema robusto en temas de seguridad y manejo de datos sensibles.
-
-## Estado actual del proyecto:
-
-- En este preciso instante el proyecto ya incluye modulos de gestion de ususarios, tales como:
-
-1. -creacion de nuevos usuarios
-2. -eliminacion de usuarios
-3. -validaciones de seguridad
-4. -manejo especifico de errores tanto errores comunes de ususario como errores complejos bajo los servidores
-5. -manejo de base de datos real con MySQL
-6. -interaccion real de usuarios con protecciones de rutas y proteccion de acceso
-7. -modulos para la creacion y consulta de gestion de produccion con logica matematica implementada
-8. -gestion de auditorias para cambios en el sistema
-
-## Principales dependencias y librerias que debes instalar para su funcionamiento:
-
-1. frontend:
-   - @testing-library/dom: Herramientas para realizar pruebas sobre el DOM de forma confiable.
-   - @testing-library/jest-dom: Extiende Jest con aserciones específicas para validar elementos del DOM.
-   - @testing-library/react: Facilita la prueba de componentes de React simulando su comportamiento real.
-   - @testing-library/user-event: Permite simular interacciones del usuario en pruebas automatizadas.
-   - jwt-decode: Utilidad para decodificar tokens JWT en el cliente.
-   - react: Biblioteca principal para la construcción de interfaces de usuario.
-   - react-dom: Maneja la renderización de componentes React en el navegador.
-   - react-idle-timer: Detecta la inactividad del usuario dentro de la aplicación.
-   - react-router-dom: Gestiona la navegación y el enrutamiento en aplicaciones React.
-   - react-scripts: Proporciona la configuración base y scripts de desarrollo para la aplicación.
-   - web-vitals: Permite medir métricas clave de rendimiento web.
-   - zxcvbn: Evalúa la fortaleza de contraseñas ingresadas por el usuario.
-   - sweetalert: crea alertas personalizadas de manera sencilla.
-
-2. backend:
-   - bcrypt: Biblioteca para el cifrado seguro de contraseñas mediante hashing.
-   - cors: Middleware que habilita y configura el acceso entre dominios (Cross-Origin Resource Sharing).
-   - dotenv: Permite gestionar variables de entorno desde archivos .env.
-   - express: Framework web para Node.js utilizado para construir APIs y manejar rutas del servidor.
-   - jsonwebtoken: Implementa la generación y validación de tokens JWT para autenticación y autorización.
-   - mysql2: Cliente de MySQL para Node.js con soporte para consultas eficientes y promesas.
-   - nodemailer: Herramienta para el envío de correos electrónicos desde el servidor.
-
-   ### para instalar todas las dependencias dirigete en tu consola a la ruta "/cuentasdjreact/backend" o "/cuentasdjreact/frontend" y ejecuta el comando `npm install`, esto instalara automaticamente todas las dependencias necesarias.
-
-# Como configurarlo para su uso y prueba:
-
-### 1. instalacion de dependencias:
-
-Asegurate de instalar cada una de las dependencias mencionadas anteriormente, en este proyecto se usaron las ultimas versiones de cada una de estas.
-
-### 2. creacion de archivos .env para tokens y correos:
-
-Este proyecto utiliza un sistema de gestion de ususarios centralizado en administradores, es decir, que todos los correos para los codigos se envian a un unico correo de administrador.
-
-2.1: A continuacion despues de tener las carpetas ya en tu repositorio local debes crear los siguientes archivos especificamente:
-
-### En la ruta /backend/ (carpeta raiz del backend):
-
-- Archivo llamado "contrasena.env" que debe tener el siguiente contenido:
-
-```bash
-correo= (aqui se coloca el correo gmail al que llegaran los correos)
-contrasena= (aqui pondras la contraseña de aplicacion que te dara google automaticamente, NO PONER TU CONTRASEÑA REAL||     enlace tuto para generar la contraseña: https://youtube.com/shorts/QzR0SnqcHbo?si=S1EEUTVjZ3g1PMv-  || creditos:     TechForest)
-```
-
-- Archivo llamado "secretKey.env" que debe tener el siguiente contenido:
-  ```bash
-  JWT-SECRET= (aqui va una contraseña de tu preferencia, prioriza que sea segura)
-  ```
-
-### 3. configuracion de la base de datos:
-
-3.1: para configurar la base de datos debes realizar la creacion de la tabla ya sea en la consola de comandos de tu servidor o ejecutando el comando directamente en MySQL Workbench.
-
-3.2: comando para la creacion de la base de datos:
-
-- En el siguiente comando se crea la base de datos, se crea la tabla con los campos requeridos y se crea un usuario por defecto para inicio de sesion:
-
-- Crear base de datos:
-
-Ejecuta el script SQL incluido:
-
-```bash
-mysql -u root -p < esquemasSQL/tablaUsuarios.sql
-```
-
-Para realizar el inicio de sesion se crea un usuario por defecto con credenciales:
-
-```
-Usuario: Admin
-contraseña: Admin
-```
-
-la contraseña se genera con un hash de bcrypt externo, y ya que el backend tenga acceso a la base de datos usara la dependencia bcrypt para comparar la contraseña en texto plano en el modulo de inicio de sesion con la contraseña guardada en la base de datos.
-
-- el siguiente comando es para la creacion de la base de datos de las cuentas, la cual tiene dos tablas:
-
-Ejecuta el script SQL incluido:
-
-```bash
-mysql -u root -p < esquemasSQL/tablaUsuarios.sql
-```
-
-- el siguiente comando es para la creacion de la base de datos de las auditorias, la cual tiene dos tablas:
-
-Ejecuta el script SQL incluido:
-
-```bash
-mysql -u root -p < esquemasSQL/tablaAuditoria.sql
-```
-
-3.3: conexion a la base de datos:
-
-para conectar tu base de datos debes dirigirte a la ruta "/backend/config/db.js" o "backend/config/dbProduccion.js" o "/backend/config/dbAuditoria.js"
-aqui encontraras y modificaras el siguiente contenido:
-
-```bash
-
-    const mysql = require("mysql2");
-
-const db = mysql.createConnection({
-host: "localhost", -> el host de tu servidor de base de datos
-user: "root", -> el nombre de usuario que tengas configurado en tu servidor
-password: "sqlCuentasdj", -> la contraseña de tu servidor
-database: "cuentasdjUsers", -> la base de datos que creamos previamente
-});
-
-db.connect((err) => { -> no modificar, esto comprueba que el backend si se esta comunicando con la base de datos
-if (err) {
-console.error("Error al conectar a la base de datos:", err);
-return;
-}
-console.log("Conexión a la base de datos establecida");
-);
-
-module.exports = db;
-
-```
-
-# Cosas a tener en cuenta
-
-#### 1. El nombre de las variables estan en su mayoria en español.
-
-#### 2. Se puede interpetar como inconsistencia las variables contraseña y contrasena, pero esto es debido a la configuracion tanto de node como de las variables de base de datos, se deben dejar tan cual estan para el correcto funcionamiento.
-
-#### 3. El backend y el frontend estan separados de forma individual, es por ello que es importante leer la siguiente seccion para entender como configurar ambos servidores.
-
-# configuracion y conexion de los servidores
-
-### servidor de frontend:
-
-Este servidor se encarga de renderizar toda la parte del frontend, hacer los llamados al servidor del backend y hacer validaciones previas y posteriores de acuerdo a la interaccion del usuario.
-
-## configuracion del servidor frontend
-
-Este servidor fue migrado a vite el cual se lanza en el puerto 3000 con la URL `
-  Local:            http://localhost:3000`.
-
-Para inicializar el servidor vamos a PowerShell o cualquier consola de comandos, y nos ubicamos en la ruta ` ../cuentasdjreact/frontend` y ya ubicados ejecutamos el comando `npm run dev`.
-Si todo salio bien aparecera en consola un mensaje de confirmacion que dice ` VITE v8.0.13  ready in 157 ms` o similar.
-
-## configuracion del servidor backend
-
-En este servidor debemos agregar una configuracion diferente, ya que debemos levantarlo en otro puerto diferente al frontend.
-
-si nos ditigimos a la ruta `../backend/app.js` podemos ver en la linea 28 que seleccionamos el puerto 4000.
-Este puerto lo podemos modificar a nuestro gusto teniendo en cuenta que tenemos que modificar los componentes del frontend para que llamen al nuevo puerto que asignamos.
-
-## lanzamiento del backend
-
-Para lanzar este servidor debemos abrir la consola como anteriormente y dirigirnos a la ruta `../cuentasdjreact/backend` y ahi ejecutar el comando `node app`.
-si todo salio bien la consola nos mostrara el mensaje de confirmacion `Servidor corriendo en http://localhost:4000
-Conexión a la base de datos establecida`
-
-## configuracion del servidor MySQL
-
-Aqui hemos utilizado MySQL workbench, el cual nos permite crear un servidor local para nuestras bases de datos, para crear este servidor local podemos recurrir a un tutorial sencillo.
-En este caso el mas simplificado se encuentra en https://youtu.be/aA_qp6pqbPI?si=MTMvh0Hb7gRI16T8 || creditos: VerTutoriales
-
-Aqui nos enseña como crear la conexion del servidor y previamente habiamos hecho la configuracion de esta base de datos.
-[configuracion](#3-configuracion-de-la-base-de-datos)
-
-## Recomendaciondes antes de lanzar los servidores
-
-- verifica que el backend y el frontend esten usando los puertos correctos
-- verifica que ningun otro servidor este corriendo en ese puerto de forma simultanea
-- verifica que si realizas algun cambio pequeño ya sea en las rutas o en los puertos tambien hagas el cambio en todos los componentes en los que se utiliza.
-
-### Realimentacion final
-
-Este proyecto representa una implementación práctica de un sistema de gestión de usuarios con un enfoque claro en la seguridad, la validación de datos y la separación de responsabilidades entre frontend y backend.
-
-A lo largo de su desarrollo se aplicaron conceptos importantes como:
-
-- Autenticación basada en tokens (JWT)
-- Encriptación de contraseñas mediante bcrypt
-- Manejo de roles de usuario (administrador / regular)
-- Validaciones tanto del lado del cliente como del servidor
-- Manejo estructurado de errores
-- Uso de variables de entorno para proteger información sensible
-- Integración completa entre frontend, backend y base de datos
-
-#### tenemos en cuenta que este proyecto actualmente esta enfocado a un entorno de pruebas y busca ser adaptado y mejorado a un entorno de produccion real, asi que faltan muchos cambios y confguraciones que se estaran realizando a mdedida del tiempo, ademas que este proyecto solo tiene un colaborador lo cual incrementa el tiempo de desarrollo, la implemetacion de funcionalidades y la correxion de posibles errores.
-
-### Y SI ESTAS LEYENDO ESTO ME AYUDARIAS MUCHO CON TU ESTRELLA⭐
-
-# 🗽In English
-
-# CuentasDJ Project
-
-## README Language Note
-
-This README is available in Spanish and English. However, since the project is commented in Spanish, it is recommended to use the VS Code extension **"Comment Translate"** to translate code comments if needed.
+This repository contains the complete CuentasDJ application: a **React frontend**, a **Node.js/Express backend**, and the **MySQL SQL schema** required by both layers.
 
 ---
 
-# CuentasDJ Project
+## Índice / Table of Contents
 
-## Project Context
+- [Descripción / Overview](#descripción--overview)
+- [Arquitectura / Architecture](#arquitectura--architecture)
+- [Características / Features](#características--features)
+- [Requisitos / Requirements](#requisitos--requirements)
+- [Instalación / Installation](#instalación--installation)
+- [Configuración / Configuration](#configuración--configuration)
+- [Base de datos / Database](#base-de-datos--database)
+- [Ejecución / Running the application](#ejecución--running-the-application)
+- [Roles / User roles](#roles--user-roles)
+- [API](#api)
+- [Estructura / Structure](#estructura--structure)
+- [Seguridad / Security](#seguridad--security)
+- [Limitaciones / Limitations](#limitaciones--limitations)
 
-- This project is a practice project that uses technologies such as React, Node.js, and MySQL. It aims to simulate an account and user management system for a food company, with the purpose of not only managing accounts but also implementing a robust system focused on security and sensitive data handling.
+---
 
-## Current Project Status
+# Español
 
-- At this moment, the project already includes user management modules such as:
+## Descripción
 
-1. Creation of new users
-2. User deletion
-3. Security validations
-4. Specific error handling for both common user errors and complex server-side errors
-5. Real database management using MySQL
-6. Real user interaction with route protection and access protection
-7. Modules for production management creation and queries with implemented mathematical logic
-8. Audit management for system changes
+CuentasDJ es una aplicación de práctica orientada a la gestión de cuentas de usuario y registros de producción. Incluye autenticación con JWT, protección de rutas por rol, gestión de usuarios, registro de producción con cálculos de rendimiento y auditoría de actividades del sistema.
 
-## Main Dependencies and Libraries Required
+El proyecto está separado en tres partes dentro del mismo repositorio:
 
-### 1. Frontend
+- `frontend/`: aplicación React ejecutada con Vite.
+- `backend/`: API REST construida con Node.js y Express.
+- `esquemasSQl/`: script SQL para crear la base de datos, sus tablas y el usuario administrador inicial.
 
-- @testing-library/dom: Tools for reliably testing the DOM.
-- @testing-library/jest-dom: Extends Jest with specific assertions to validate DOM elements.
-- @testing-library/react: Simplifies React component testing by simulating real behavior.
-- @testing-library/user-event: Allows simulation of user interactions in automated tests.
-- jwt-decode: Utility for decoding JWT tokens on the client side.
-- react: Main library for building user interfaces.
-- react-dom: Handles rendering React components in the browser.
-- react-idle-timer: Detects user inactivity within the application.
-- react-router-dom: Manages navigation and routing in React applications.
-- react-scripts: Provides the base configuration and development scripts for the application.
-- web-vitals: Allows measuring key web performance metrics.
-- zxcvbn: Evaluates the strength of passwords entered by the user.
-- sweetalert: Creates custom alerts easily.
+## Arquitectura
 
-### 2. Backend
+```text
+Navegador (http://localhost:3000)
+        |
+        v
+Frontend React + Vite
+        |
+        | VITE_API = http://localhost:4000/api
+        v
+Backend Node.js + Express
+        |
+        | mysql2
+        v
+Base de datos MySQL: cuentasdj
+  |-- usuarios
+  |-- produccion
+  |-- bache
+  `-- actividad_sistema
+```
 
-- bcrypt: Library for secure password hashing using encryption.
-- cors: Middleware that enables and configures Cross-Origin Resource Sharing.
-- dotenv: Allows management of environment variables through `.env` files.
-- express: Web framework for Node.js used to build APIs and manage server routes.
-- jsonwebtoken: Implements JWT token generation and validation for authentication and authorization.
-- mysql2: MySQL client for Node.js with support for efficient queries and promises.
-- nodemailer: Tool for sending emails from the server.
+La aplicación usa **una única base de datos MySQL llamada `cuentasdj`**. Las tablas de usuarios, producción y auditoría se encuentran en esa misma base; ya no se utilizan conexiones separadas para producción o auditoría. Todos los controladores usan la conexión compartida definida en `backend/config/db.js`.
 
-### To install all dependencies, navigate in your console to the path `/cuentasdjreact/backend` or `/cuentasdjreact/frontend` and execute the command:
+## Características
+
+- Inicio de sesión con tokens JWT.
+- Roles de usuario: `admin`, `regular` y `auditor`.
+- Creación, consulta y eliminación de usuarios.
+- Cambio de contraseña mediante código enviado por correo.
+- Protección de rutas en el frontend y verificación de tokens en el backend.
+- Creación y consulta de registros de producción.
+- Registro de baches relacionados con cada producción.
+- Cálculos de rendimiento y cantidades producidas.
+- Consulta de actividades de auditoría por tipo y rango de fechas.
+- Detección de inactividad y validación de fortaleza de contraseñas.
+
+## Requisitos
+
+- Node.js y npm.
+- MySQL Server, preferiblemente MySQL 8 o compatible.
+- Un navegador moderno.
+- Una cuenta de correo con contraseña de aplicación si se desea probar el cambio de contraseña por correo.
+
+## Instalación
 
 ```bash
+git clone <URL_DEL_REPOSITORIO>
+cd cuentasdjreact
+
+cd backend
+npm install
+
+cd ../frontend
 npm install
 ```
 
-This will automatically install all required dependencies.
+## Configuración
 
-# How to Configure It for Usage and Testing
+### Backend
 
-## 1. Dependency Installation
+Crea estos archivos locales dentro de `backend/`. No compartas estos archivos ni subas credenciales reales al repositorio.
 
-Make sure to install each of the dependencies mentioned above. This project was developed using the latest versions of each one.
+`backend/secretKey.env`:
 
-## 2. Creating `.env` Files for Tokens and Emails
+```env
+JWT_SECRET=una-clave-larga-y-segura
+```
 
-This project uses a centralized administrator-based user management system, meaning all email codes are sent to a single administrator email account.
+`backend/contrasena.env`:
 
-### 2.1 Required Files
+```env
+correo=tu-correo@gmail.com
+contrasena=tu-contraseña-de-aplicacion
+```
 
-After having the folders in your local repository, you must create the following files specifically:
+La contraseña debe ser una **contraseña de aplicación** del proveedor de correo, no la contraseña normal de la cuenta.
 
-### In the `/backend/` path (backend root folder):
+La conexión MySQL está centralizada en `backend/config/db.js` y utiliza estos valores de desarrollo por defecto:
 
-- File named `contrasena.env` which must contain the following content:
+```js
+host: "localhost";
+user: "root";
+password: "sqlCuentasdj";
+database: "cuentasdj";
+```
+
+Modifica estos valores según tu instalación local. La aplicación utiliza una conexión única para todas las tablas.
+
+### Frontend
+
+Crea `frontend/.env` con:
+
+```env
+VITE_API=http://localhost:4000/api
+```
+
+Si cambias el puerto o la dirección del backend, actualiza esta variable. `frontend/vite.config.js` configura el servidor de desarrollo en el puerto `3000`.
+
+## Base de datos
+
+El esquema completo está en [`esquemasSQl/cuentasDj.sql`](esquemasSQl/cuentasDj.sql). Este único script:
+
+1. Crea la base de datos `cuentasdj`.
+2. Crea las tablas `usuarios`, `produccion`, `bache` y `actividad_sistema`.
+3. Configura la relación entre `bache` y `produccion` mediante una clave foránea.
+4. Inserta el usuario administrador inicial.
+
+Ejecuta el script desde la raíz del proyecto:
 
 ```bash
-correo= (place here the Gmail account that will receive the emails)
-contrasena= (place here the application password automatically generated by Google, DO NOT USE YOUR REAL PASSWORD || tutorial link to generate the password: https://youtube.com/shorts/QzR0SnqcHbo?si=S1EEUTVjZ3g1PMv- || credits: TechForest)
+mysql -u root -p < esquemasSQl/cuentasDj.sql
 ```
 
-- File named `secretKey.env` which must contain the following content:
+También puedes ejecutarlo desde MySQL Workbench. El script contiene una instrucción `DROP TABLE` para `usuarios`; revísalo antes de ejecutarlo en una base que ya tenga datos importantes.
+
+## Ejecución
+
+Abre dos terminales.
+
+Terminal 1, backend:
 
 ```bash
-JWT-SECRET= (place here a secure password of your preference)
+cd backend
+node app.js
 ```
 
-# 3. Database Configuration
+API disponible en `http://localhost:4000`.
 
-### 3.1 Database Setup
-
-To configure the database, you must create the table either through your server command console or by directly executing the command in MySQL Workbench.
-
-### 3.2 Database Creation Commands
-
-- The following command creates the database, creates the table with the required fields, and creates a default user for login purposes.
-
-### Create Database
-
-Execute the included SQL script:
+Terminal 2, frontend:
 
 ```bash
-mysql -u root -p < esquemasSQL/tablaUsuarios.sql
+cd frontend
+npm run dev
 ```
 
-A default user is created for login with the following credentials:
+Interfaz disponible en `http://localhost:3000`.
 
-```txt
-Usuario: Admin
-contraseña: Admin
-```
-
-The password is generated using an external bcrypt hash, and once the backend has access to the database, it will use the bcrypt dependency to compare the plain text password entered in the login module with the password stored in the database.
-
-- The following command is used to create the accounts database, which contains two tables:
-
-Execute the included SQL script:
+Para generar y previsualizar una compilación de producción:
 
 ```bash
-mysql -u root -p < esquemasSQL/tablaUsuarios.sql
+cd frontend
+npm run build
+npm run preview
 ```
 
-- The following command is used to create the audit database, which contains two tables:
+## Roles
 
-Execute the included SQL script:
+| Rol       | Responsabilidades                                                                   |
+| --------- | ----------------------------------------------------------------------------------- |
+| `admin`   | Gestionar usuarios, crear registros y consultar o eliminar registros de producción. |
+| `regular` | Crear y consultar registros de producción.                                          |
+| `auditor` | Consultar la actividad registrada en el sistema.                                    |
+
+## API
+
+Todas las rutas de negocio usan el prefijo `/api`.
+
+| Método   | Ruta                                  | Descripción                                       |
+| -------- | ------------------------------------- | ------------------------------------------------- |
+| `POST`   | `/api/login`                          | Iniciar sesión.                                   |
+| `POST`   | `/api/cambiarcontrasena`              | Solicitar un código de cambio de contraseña.      |
+| `POST`   | `/api/verificarCodigo`                | Verificar el código de cambio.                    |
+| `POST`   | `/api/crearUsuario`                   | Crear un usuario.                                 |
+| `GET`    | `/api/listarUsuarios`                 | Listar usuarios.                                  |
+| `DELETE` | `/api/usuario/:idUsuarios`            | Eliminar un usuario autenticado.                  |
+| `POST`   | `/api/crearRegistro`                  | Crear un registro de producción.                  |
+| `GET`    | `/api/consultarRegistro`              | Consultar producción por turno y fecha.           |
+| `DELETE` | `/api/eliminarRegistro/:idProduccion` | Eliminar una producción y sus baches.             |
+| `GET`    | `/api/consultarAuditoria`             | Consultar actividades por tipo y rango de fechas. |
+
+La ruta raíz `GET /` sirve como comprobación básica y responde `Backend funcionando`.
+
+## Estructura
+
+```text
+backend/
+|-- app.js
+|-- contrasena.env              # Configuración local de correo
+|-- secretKey.env               # Secreto local para JWT
+|-- config/db.js                # Única conexión MySQL
+|-- controladores/              # Lógica de las rutas
+|-- logicaMat/                  # Cálculos de producción
+`-- routes/routes.js            # Rutas de la API
+
+frontend/
+|-- package.json
+|-- vite.config.js
+`-- src/
+    |-- App.jsx
+    |-- context/
+    |-- generales/
+    |-- inicio/
+    |-- reutilizables/
+    |-- userAdmin/
+    |-- userAuditor/
+    `-- userRegular/
+
+esquemasSQl/
+`-- cuentasDj.sql               # Esquema completo de MySQL
+```
+
+## Seguridad
+
+- No publiques `backend/contrasena.env`, `backend/secretKey.env` ni `frontend/.env`.
+- Usa una clave JWT larga, aleatoria y exclusiva para cada entorno.
+- Usa contraseñas de aplicación para el correo.
+- Cambia las credenciales por defecto de MySQL antes de desplegar.
+- No uses el usuario administrador inicial en producción sin cambiar sus credenciales.
+- Configura CORS para permitir únicamente los dominios autorizados.
+- El proyecto está orientado actualmente a desarrollo y pruebas; requiere una revisión adicional antes de desplegarse en producción.
+
+## Limitaciones conocidas
+
+- El backend utiliza una configuración local de conexión y no un pool de conexiones.
+- El puerto, el origen de CORS y algunas configuraciones de desarrollo están definidos en archivos del proyecto.
+- No hay un script de pruebas automatizadas del backend configurado en `backend/package.json`.
+
+Las variables y algunos nombres de columnas conservan convenciones en español porque forman parte del contrato actual entre el frontend, el backend y la base de datos.
+
+---
+
+# English
+
+## Overview
+
+CuentasDJ is a practice web application for user management, production records, and system auditing in a food-company context. It includes JWT authentication, role-based route protection, user administration, production calculations, and audit activity tracking.
+
+This repository contains the complete application in three parts:
+
+- `frontend/`: React application powered by Vite.
+- `backend/`: REST API built with Node.js and Express.
+- `esquemasSQl/`: MySQL script containing the database schema and the initial administrator user.
+
+## Architecture
+
+The browser loads the frontend from `http://localhost:3000`. The frontend sends requests to the backend through `VITE_API`, which defaults to `http://localhost:4000/api`. The backend uses `mysql2` to connect all features to the single MySQL database named `cuentasdj`.
+
+The database contains `usuarios`, `produccion`, `bache`, and `actividad_sistema`. Production and audit operations no longer use separate database connections; all controllers use the shared connection defined in `backend/config/db.js`.
+
+## Features
+
+- JWT-based login.
+- `admin`, `regular`, and `auditor` roles.
+- User creation, listing, and deletion.
+- Password-change flow using an email verification code.
+- Frontend route protection and backend token verification.
+- Production record creation and lookup.
+- Batch records linked to production records.
+- Production and yield calculations.
+- Audit lookup by activity type and date range.
+- Idle-user detection and password-strength validation.
+
+## Requirements
+
+- Node.js and npm.
+- MySQL Server, preferably MySQL 8 or a compatible version.
+- A modern web browser.
+- An email account with an application password if the password-change flow must be tested.
+
+## Installation
 
 ```bash
-mysql -u root -p < esquemasSQL/tablaAuditoria.sql
+git clone <REPOSITORY_URL>
+cd cuentasdjreact
+
+cd backend
+npm install
+
+cd ../frontend
+npm install
 ```
 
-### 3.3 Database Connection
+## Configuration
 
-To connect your database, navigate to the path:
+Create `backend/secretKey.env`:
 
-- `/backend/config/db.js`
-- `/backend/config/dbProduccion.js`
-- `/backend/config/dbAuditoria.js`
+```env
+JWT_SECRET=use-a-long-random-secret
+```
 
-There you will find and modify the following content:
+Create `backend/contrasena.env`:
+
+```env
+correo=your-email@gmail.com
+contrasena=your-email-app-password
+```
+
+Use an email **application password**, not the normal account password. Do not commit these files or any real credentials.
+
+The single MySQL connection is defined in `backend/config/db.js`. Its current development defaults are:
+
+```js
+host: "localhost";
+user: "root";
+password: "sqlCuentasdj";
+database: "cuentasdj";
+```
+
+Update them for your local MySQL installation.
+
+Create `frontend/.env`:
+
+```env
+VITE_API=http://localhost:4000/api
+```
+
+Update this value whenever the backend address or port changes. Vite serves the frontend on port `3000` by default.
+
+## Database
+
+The complete schema is available at [`esquemasSQl/cuentasDj.sql`](esquemasSQl/cuentasDj.sql). It creates the `cuentasdj` database, creates the four application tables, defines the foreign-key relationship between `bache` and `produccion`, and inserts the initial administrator user.
+
+Run it from the repository root:
 
 ```bash
-const mysql = require("mysql2");
-
-const db = mysql.createConnection({
-host: "localhost", -> your database server host
-user: "root", -> the username configured on your server
-password: "sqlCuentasdj", -> your server password
-database: "cuentasdjUsers", -> the database we previously created
-});
-
-db.connect((err) => { -> do not modify, this checks whether the backend is communicating with the database
-if (err) {
-console.error("Error connecting to the database:", err);
-return;
-}
-console.log("Database connection established");
-});
-
-module.exports = db;
+mysql -u root -p < esquemasSQl/cuentasDj.sql
 ```
 
-# Important Things to Keep in Mind
+You can also run the script in MySQL Workbench. Review it before running it against an existing database because it contains a `DROP TABLE` statement for `usuarios`.
 
-#### 1. Most variable names are written in Spanish.
+## Running the application
 
-#### 2. The variables `contraseña` and `contrasena` may appear inconsistent, but this is due to both Node.js configuration and database variable configuration. They must remain exactly as they are for proper functionality.
-
-#### 3. The backend and frontend are separated individually, which is why it is important to read the following section to understand how to configure both servers.
-
-# Server Configuration and Connection
-
-## Frontend Server
-
-This server is responsible for rendering the entire frontend, making requests to the backend server, and performing validations before and after user interaction.
-
-## Frontend Server Configuration
-
-This server uses the default `create-react-app` configuration, which runs by default on port `3000` with the URL:
-
-```txt
-Local: http://localhost:3000
-```
-
-To initialize the server, open PowerShell or any command console, navigate to the path `../cuentasdjreact/frontend`, and execute the command:
+Start the backend in one terminal:
 
 ```bash
-npm start
+cd backend
+node app.js
 ```
 
-If everything went correctly, a confirmation message saying `webpack compiled successfully` will appear in the console.
+The API will be available at `http://localhost:4000`.
 
-## Backend Server Configuration
-
-This server requires a different configuration because it must run on a different port from the frontend.
-
-If we navigate to the path `../backend/app.js`, we can see on line 28 that port `4000` is selected.
-
-This port can be modified as desired, taking into account that the frontend components must also be updated to call the new assigned port.
-
-## Launching the Backend
-
-To launch this server, open the console as before and navigate to the path `../cuentasdjreact/backend`, then execute the command:
+Start the frontend in a second terminal:
 
 ```bash
-node app
+cd frontend
+npm run dev
 ```
 
-If everything went correctly, the console will display the confirmation message:
+The interface will be available at `http://localhost:3000`.
 
-```txt
-Servidor corriendo en http://localhost:4000
-Conexión a la base de datos establecida
+To create and preview a production build:
+
+```bash
+cd frontend
+npm run build
+npm run preview
 ```
 
-## MySQL Server Configuration
+## User roles
 
-In this project, MySQL Workbench was used, which allows us to create a local server for our databases. To create this local server, you can follow a simple tutorial.
+| Role      | Responsibilities                                                                |
+| --------- | ------------------------------------------------------------------------------- |
+| `admin`   | Manage users, create production records, and view or delete production records. |
+| `regular` | Create and view production records.                                             |
+| `auditor` | View recorded system activity.                                                  |
 
-In this case, the most simplified tutorial can be found at:
-https://youtu.be/aA_qp6pqbPI?si=MTMvh0Hb7gRI16T8 || credits: VerTutoriales
+## API
 
-Here it explains how to create the server connection, and previously we already configured this database.
-[configuration](#3-database-configuration)
+All application routes use the `/api` prefix.
 
-## Recommendations Before Launching the Servers
+| Method   | Route                                 | Description                                 |
+| -------- | ------------------------------------- | ------------------------------------------- |
+| `POST`   | `/api/login`                          | Sign in.                                    |
+| `POST`   | `/api/cambiarcontrasena`              | Request a password-change code.             |
+| `POST`   | `/api/verificarCodigo`                | Verify the password-change code.            |
+| `POST`   | `/api/crearUsuario`                   | Create a user.                              |
+| `GET`    | `/api/listarUsuarios`                 | List users.                                 |
+| `DELETE` | `/api/usuario/:idUsuarios`            | Delete an authenticated user.               |
+| `POST`   | `/api/crearRegistro`                  | Create a production record.                 |
+| `GET`    | `/api/consultarRegistro`              | Find production by shift and date.          |
+| `DELETE` | `/api/eliminarRegistro/:idProduccion` | Delete a production record and its batches. |
+| `GET`    | `/api/consultarAuditoria`             | Find activity by type and date range.       |
 
-- Verify that the backend and frontend are using the correct ports.
-- Verify that no other server is running simultaneously on those ports.
-- Verify that if you make any small changes, whether in routes or ports, you also update all components where they are used.
+The root `GET /` endpoint is a basic health check and responds with `Backend funcionando`.
 
-### Final Feedback
+## Structure
 
-This project represents a practical implementation of a user management system with a clear focus on security, data validation, and separation of responsibilities between frontend and backend.
+```text
+backend/                       # Node.js and Express API
+frontend/                      # React and Vite application
+esquemasSQl/cuentasDj.sql     # Complete MySQL schema
+```
 
-Throughout its development, important concepts were applied such as:
+The backend connection is centralized in `backend/config/db.js`; controller modules are located in `backend/controladores/`, API routes in `backend/routes/`, and production calculations in `backend/logicaMat/`.
 
-- JWT-based authentication
-- Password encryption using bcrypt
-- User role management (administrator / regular)
-- Client-side and server-side validations
-- Structured error handling
-- Use of environment variables to protect sensitive information
-- Complete integration between frontend, backend, and database
+## Security notes
 
-#### Keep in mind that this project is currently focused on a testing environment and aims to be adapted and improved for a real production environment, so many changes and configurations are still pending and will continue to be implemented over time. Additionally, this project currently has only one collaborator, which increases development time, feature implementation time, and the correction of possible errors.
+- Never publish `backend/contrasena.env`, `backend/secretKey.env`, or `frontend/.env`.
+- Use a long, random, environment-specific JWT secret.
+- Use an email application password for SMTP access.
+- Replace default MySQL credentials before deployment.
+- Do not use the initial administrator credentials in production without changing them.
+- Restrict CORS to trusted frontend origins.
+- Review the application before deploying it to production; the current configuration is intended for development and testing.
 
-### AND IF YOU ARE READING THIS, YOUR STAR WOULD HELP ME A LOT ⭐
+## Current limitations
+
+- The backend uses a local connection configuration instead of a connection pool.
+- The port, CORS origin, and some development settings are defined in project files.
+- No backend automated-test command is currently configured in `backend/package.json`.
+
+Some variable names and database columns remain in Spanish because they are part of the current frontend, backend, and database contract.
+
+---
+
+Este README documenta conjuntamente el frontend, el backend y el esquema SQL. / This README documents the frontend, backend, and SQL schema together.

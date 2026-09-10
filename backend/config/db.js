@@ -1,11 +1,11 @@
 const mysql = require("mysql2");
 
-// Configuración de la conexión a la base de datos de usuarios
+// Configuración de la conexión a la base de datos única
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "sqlCuentasdj",
-  database: "cuentasdjUsers",
+  database: "cuentasdj",
   timezone: `local`,
 });
 
