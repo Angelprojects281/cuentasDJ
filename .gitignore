@@ -24,3 +24,5 @@ yarn-debug.log*
 yarn-error.log*
 /backend/contrasena.env
 /backend/secretKey.env
+/backend/dbPassword.env
+/backend/ca.pem
