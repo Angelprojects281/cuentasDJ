@@ -1,6 +1,4 @@
 const db = require("../config/db");
-const dns = require("node:dns");
-const nodemailer = require("nodemailer");
 require("dotenv").config({ path: __dirname + "/../contrasena.env" });
 const bcrypt = require("bcrypt");
 const {
@@ -19,25 +17,39 @@ function calcularTiempoExpiracion() {
   return ahora;
 }
 
-// Configuración del transporte de correo utilizando nodemailer
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.correo?.trim(),
-    pass: process.env.contrasena?.replace(/\s/g, ""),
-  },
-});
-
 // Función para enviar el correo con el código de verificación
 async function enviarCorreo(codigo, idUsuarios, Rol) {
-  const mailOptions = {
-    from: process.env.correo,
-    to: process.env.correo,
-    subject: "Código de verificación para cambio de contraseña",
-    html: `<p>Tu código de verificación para el usuario <b>${idUsuarios}</b> con rol <b>${Rol}</b> es: <b>${codigo}</b>. Este código es válido por 15 minutos.</p>`,
-  };
+  if (!process.env.RESEND_API_KEY) {
+    const error = new Error("Falta configurar RESEND_API_KEY");
+    error.code = "EMAIL_CONFIG_MISSING";
+    throw error;
+  }
 
-  return await transporter.sendMail(mailOptions);
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: process.env.EMAIL_FROM || "onboarding@resend.dev",
+      to: [process.env.correo?.trim()],
+      subject: "Código de verificación para cambio de contraseña",
+      html: `<p>Tu código de verificación para el usuario <b>${idUsuarios}</b> con rol <b>${Rol}</b> es: <b>${codigo}</b>. Este código es válido por 15 minutos.</p>`,
+    }),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(
+      data.message || "La API de correo rechazó el envío",
+    );
+    error.code = data.name || `HTTP_${response.status}`;
+    throw error;
+  }
+
+  return data;
 }
 
 // Función para manejar la solicitud de cambio de contraseña
