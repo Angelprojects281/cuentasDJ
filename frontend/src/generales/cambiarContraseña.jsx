@@ -25,13 +25,21 @@ function CambiarContraseña() {
   const [codigo, setCVerificacion] = useState("");
 
   const [seSolicitoCodigo, setSeSolicitoCodigo] = useState(false);
+  const [solicitandoCodigo, setSolicitandoCodigo] = useState(false);
 
   //evalua la seguridad de contraseña y envia la solicitud del codigo al backend
   const handleSolicitarCodigo = async () => {
+    if (solicitandoCodigo || seSolicitoCodigo) {
+      return;
+    }
+
+    setSolicitandoCodigo(true);
+
     try {
       const resultadoSeguridad = await zxcvbn(cNueva);
 
       if (resultadoSeguridad.score < 3) {
+        setSolicitandoCodigo(false);
         mostrarAlerta(
           "warning",
           "Contraseña insegura",
@@ -55,6 +63,7 @@ function CambiarContraseña() {
       const data = await res.json();
 
       if (!res.ok) {
+        setSolicitandoCodigo(false);
         mostrarAlerta("error", "Error al enviar el codigo", data.error);
         return;
       }
@@ -66,6 +75,7 @@ function CambiarContraseña() {
       );
       setSeSolicitoCodigo(true);
     } catch (_error) {
+      setSolicitandoCodigo(false);
       mostrarAlerta(
         "error",
         "Error al solicitar el codigo",
@@ -157,11 +167,11 @@ function CambiarContraseña() {
 
           <button
             id="enviar"
-            className={`principales ${seSolicitoCodigo ? "botonDesabilitado" : ""}`}
+            className={`principales ${seSolicitoCodigo || solicitandoCodigo ? "botonDesabilitado" : ""}`}
             onClick={handleSolicitarCodigo}
-            disabled={seSolicitoCodigo}
+            disabled={seSolicitoCodigo || solicitandoCodigo}
           >
-            Solicitar código
+            {solicitandoCodigo ? "Enviando código..." : "Solicitar código"}
           </button>
 
           <button

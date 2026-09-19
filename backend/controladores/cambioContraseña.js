@@ -20,16 +20,11 @@ function calcularTiempoExpiracion() {
 
 // Configuración del transporte de correo utilizando nodemailer
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
+  service: "gmail",
   auth: {
-    user: process.env.correo?.trim(),
-    pass: process.env.contrasena?.replace(/\s/g, ""),
+    user: process.env.correo,
+    pass: process.env.contrasena,
   },
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000,
 });
 
 // Función para enviar el correo con el código de verificación
