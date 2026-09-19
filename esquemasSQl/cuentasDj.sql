@@ -107,7 +107,7 @@ COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS actividad_sistema (
     idactividad_sistema INT NOT NULL AUTO_INCREMENT,
-    fecha DATE NOT NULL,
+    fecha DATETIME NOT NULL,
     tipo_actividad VARCHAR(45) NOT NULL,
     detalles VARCHAR(500) NOT NULL,
 

@@ -2,7 +2,19 @@
 
 function CrearRegistroAuditoria(tipo_actividad, detalles) {
   const db = require("../config/db");
-  const fechaActual = new Date();
+  const partesFecha = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Bogota",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(new Date());
+  const obtenerParte = (tipo) =>
+    partesFecha.find((parte) => parte.type === tipo).value;
+  const fechaActual = `${obtenerParte("year")}-${obtenerParte("month")}-${obtenerParte("day")} ${obtenerParte("hour")}:${obtenerParte("minute")}:${obtenerParte("second")}`;
   const query =
     "INSERT INTO actividad_sistema (fecha, tipo_actividad, detalles) VALUES (?,?,?)";
 

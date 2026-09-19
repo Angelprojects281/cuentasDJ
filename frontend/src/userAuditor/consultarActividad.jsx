@@ -8,6 +8,12 @@ import { mostrarAlerta } from "../reutilizables/alertas";
 
 import { useState } from "react";
 
+function formatearFechaLocal(fecha) {
+  const [fechaParte, horaParte = ""] = fecha.replace("T", " ").split(" ");
+  const [anio, mes, dia] = fechaParte.split("-");
+  return `${dia}/${mes}/${anio} ${horaParte.slice(0, 5)}`;
+}
+
 function ConsultarActividad() {
   const [tipoActividad, setTipoActividad] = useState("");
   const [fechaInicio, setFechaInicio] = useState("");
@@ -162,16 +168,7 @@ function ConsultarActividad() {
                 <li key={actividad.idactividad_sistema}>
                   <p className="fila">
                     <strong>Fecha y hora:</strong>
-                    <span>
-                      {new Date(actividad.fecha).toLocaleString("es-ES", {
-                        year: "numeric",
-                        month: "2-digit",
-                        day: "2-digit",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        hour12: false,
-                      })}
-                    </span>
+                    <span>{formatearFechaLocal(actividad.fecha)}</span>
                   </p>
                   <p className="fila">
                     <strong>Detalles:</strong>

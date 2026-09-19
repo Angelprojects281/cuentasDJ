@@ -1,0 +1,2 @@
+ALTER TABLE actividad_sistema
+MODIFY COLUMN fecha DATETIME NOT NULL;

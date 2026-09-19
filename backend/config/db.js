@@ -11,6 +11,7 @@ const db = mysql.createConnection({
   user: "avnadmin",
   password: process.env.PASSWORD,
   database: "cuentasdj",
+  timezone: "-05:00",
   ssl: {
     ca: fs.readFileSync(path.join(__dirname, "..", "ca.pem")),
     rejectUnauthorized: true,

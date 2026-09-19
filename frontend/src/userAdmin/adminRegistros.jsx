@@ -183,9 +183,7 @@ function AdminRegistros() {
                   </tr>
                   <tr>
                     <th>Fecha</th>
-                    <td>
-                      {new Date(produccion.fecha_prod).toLocaleDateString()}
-                    </td>
+                    <td>{produccion.fecha_prod}</td>
                   </tr>
                   <tr>
                     <th>Proveedor de rinde</th>
