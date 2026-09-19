@@ -22,8 +22,8 @@ function calcularTiempoExpiracion() {
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.correo,
-    pass: process.env.contrasena,
+    user: process.env.correo?.trim(),
+    pass: process.env.contrasena?.replace(/\s/g, ""),
   },
 });
 
@@ -93,7 +93,11 @@ const cambiarcontrasena = (req, res) => {
             message: "Código de verificación enviado al correo",
           });
         } catch (mailError) {
-          console.error("Error al enviar el correo:", mailError.message);
+          console.error("Error al enviar el correo:", {
+            code: mailError.code,
+            responseCode: mailError.responseCode,
+            message: mailError.message,
+          });
           return res.status(500).json({ error: "Error al enviar el correo" });
         }
       },
