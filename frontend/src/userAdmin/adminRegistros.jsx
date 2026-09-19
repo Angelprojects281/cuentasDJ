@@ -8,6 +8,10 @@ import {
 import { useState } from "react";
 import { mostrarAlerta, mostrarConfirmacion } from "../reutilizables/alertas";
 
+function formatearFechaProduccion(fecha) {
+  return String(fecha).split(/[T ]/)[0];
+}
+
 function AdminRegistros() {
   const [turno, setturno] = useState("");
   const [fecha, setfecha] = useState("");
@@ -183,7 +187,7 @@ function AdminRegistros() {
                   </tr>
                   <tr>
                     <th>Fecha</th>
-                    <td>{produccion.fecha_prod}</td>
+                    <td>{formatearFechaProduccion(produccion.fecha_prod)}</td>
                   </tr>
                   <tr>
                     <th>Proveedor de rinde</th>
