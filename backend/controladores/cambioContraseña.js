@@ -29,9 +29,6 @@ const transporter = nodemailer.createTransport({
     user: process.env.correo?.trim(),
     pass: process.env.contrasena?.replace(/\s/g, ""),
   },
-  connectionTimeout: 15000,
-  greetingTimeout: 15000,
-  socketTimeout: 15000,
 });
 
 // Función para enviar el correo con el código de verificación
