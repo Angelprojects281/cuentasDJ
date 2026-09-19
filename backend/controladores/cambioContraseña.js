@@ -23,9 +23,7 @@ function calcularTiempoExpiracion() {
 
 // Configuración del transporte de correo utilizando nodemailer
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
+  service: "gmail",
   family: 4,
   auth: {
     user: process.env.correo?.trim(),
