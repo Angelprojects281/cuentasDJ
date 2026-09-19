@@ -77,7 +77,7 @@ La aplicación usa **una única base de datos MySQL llamada `cuentasdj`**. Las t
 - Node.js y npm.
 - MySQL Server, preferiblemente MySQL 8 o compatible.
 - Un navegador moderno.
-- Una cuenta de correo con contraseña de aplicación si se desea probar el cambio de contraseña por correo.
+- Una cuenta en Resend para probar el envío de códigos por correo.
 
 ## Instalación
 
@@ -108,10 +108,23 @@ JWT_SECRET=una-clave-larga-y-segura
 
 ```env
 correo=tu-correo@gmail.com
-contrasena=tu-contraseña-de-aplicacion
+RESEND_API_KEY=re_tu_api_key_de_resend
+EMAIL_FROM=onboarding@resend.dev
 ```
 
-La contraseña debe ser una **contraseña de aplicación** del proveedor de correo, no la contraseña normal de la cuenta.
+`correo` es el destinatario del código. `RESEND_API_KEY` se genera en el panel de Resend y `EMAIL_FROM` debe ser un remitente permitido por Resend. Para producción, verifica un dominio en Resend y usa un remitente de ese dominio.
+
+En Render configura estas variables en el servicio del backend:
+
+```env
+PASSWORD=contraseña_de_la_base_de_datos
+JWT_SECRET=una-clave-larga-y-segura
+correo=tu-correo@gmail.com
+RESEND_API_KEY=re_tu_api_key_de_resend
+EMAIL_FROM=onboarding@resend.dev
+```
+
+No uses una contraseña de Gmail como `RESEND_API_KEY`. No compartas estos archivos ni subas claves reales al repositorio.
 
 La conexión MySQL está centralizada en `backend/config/db.js` y utiliza estos valores de desarrollo por defecto:
 
@@ -241,7 +254,7 @@ esquemasSQl/
 
 - No publiques `backend/contrasena.env`, `backend/secretKey.env` ni `frontend/.env`.
 - Usa una clave JWT larga, aleatoria y exclusiva para cada entorno.
-- Usa contraseñas de aplicación para el correo.
+- Usa una API key de Resend para el correo y verifica el dominio del remitente en producción.
 - Cambia las credenciales por defecto de MySQL antes de desplegar.
 - No uses el usuario administrador inicial en producción sin cambiar sus credenciales.
 - Configura CORS para permitir únicamente los dominios autorizados.
@@ -293,7 +306,7 @@ The database contains `usuarios`, `produccion`, `bache`, and `actividad_sistema`
 - Node.js and npm.
 - MySQL Server, preferably MySQL 8 or a compatible version.
 - A modern web browser.
-- An email account with an application password if the password-change flow must be tested.
+- A Resend account to test password-change email delivery.
 
 ## Installation
 
@@ -320,10 +333,23 @@ Create `backend/contrasena.env`:
 
 ```env
 correo=your-email@gmail.com
-contrasena=your-email-app-password
+RESEND_API_KEY=re_your_resend_api_key
+EMAIL_FROM=onboarding@resend.dev
 ```
 
-Use an email **application password**, not the normal account password. Do not commit these files or any real credentials.
+`correo` is the code recipient. Generate `RESEND_API_KEY` in the Resend dashboard. `EMAIL_FROM` must be an approved Resend sender. For production, verify a domain in Resend and use a sender from that domain.
+
+For Render, configure these variables in the backend service:
+
+```env
+PASSWORD=your_database_password
+JWT_SECRET=use-a-long-random-secret
+correo=your-email@gmail.com
+RESEND_API_KEY=re_your_resend_api_key
+EMAIL_FROM=onboarding@resend.dev
+```
+
+Do not use a Gmail password as `RESEND_API_KEY`. Do not commit these files or any real credentials.
 
 The single MySQL connection is defined in `backend/config/db.js`. Its current development defaults are:
 
@@ -425,7 +451,7 @@ The backend connection is centralized in `backend/config/db.js`; controller modu
 
 - Never publish `backend/contrasena.env`, `backend/secretKey.env`, or `frontend/.env`.
 - Use a long, random, environment-specific JWT secret.
-- Use an email application password for SMTP access.
+- Use a Resend API key for email delivery and verify the sender domain in production.
 - Replace default MySQL credentials before deployment.
 - Do not use the initial administrator credentials in production without changing them.
 - Restrict CORS to trusted frontend origins.
