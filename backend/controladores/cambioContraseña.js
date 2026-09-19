@@ -1,10 +1,13 @@
 const db = require("../config/db");
+const dns = require("node:dns");
 const nodemailer = require("nodemailer");
 require("dotenv").config({ path: __dirname + "/../contrasena.env" });
 const bcrypt = require("bcrypt");
 const {
   CrearRegistroAuditoria,
 } = require("../controladores/registroAuditoria");
+
+dns.setDefaultResultOrder("ipv4first");
 
 // Función para generar un código de verificación aleatorio de 4 dígitos
 function generarCodigo() {
