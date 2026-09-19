@@ -7,8 +7,6 @@ const {
   CrearRegistroAuditoria,
 } = require("../controladores/registroAuditoria");
 
-dns.setDefaultResultOrder("ipv4first");
-
 // Función para generar un código de verificación aleatorio de 4 dígitos
 function generarCodigo() {
   return Math.floor(1000 + Math.random() * 9000).toString();
@@ -26,8 +24,8 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   family: 4,
   auth: {
-    user: process.env.correo?.trim(),
-    pass: process.env.contrasena?.replace(/\s/g, ""),
+    user: process.env.correo,
+    pass: process.env.contrasena,
   },
 });
 
