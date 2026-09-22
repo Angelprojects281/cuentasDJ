@@ -104,12 +104,14 @@ body {
 }
 
 #detallesProduccion,
-#detallesBache {
+#detallesBaches {
   border: solid 1px #000000;
   border-radius: 15px;
   text-align: left;
   line-height: 30px;
   box-shadow: var(--box_shadow);
+  width: 100%;
+  max-width: 600px;
 }
 
 .fila {
@@ -273,13 +275,14 @@ button:not(.tema) {
 }
 
 .listas {
-  width: 80%;
-  max-width: 600px;
+  width: 100%;
+  max-width: 100%;
   margin: auto;
   padding: 1px 16px;
   list-style: decimal;
   font-size: 16px;
   color: var(--text_color);
+  overflow: hidden;
 }
 
 .listas li {
