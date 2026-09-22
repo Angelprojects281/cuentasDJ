@@ -103,7 +103,8 @@ body {
   animation: Entrance 0.5s ease-in;
 }
 
-#detallesProduccion {
+#detallesProduccion,
+#detallesBache {
   border: solid 1px #000000;
   border-radius: 15px;
   text-align: left;
