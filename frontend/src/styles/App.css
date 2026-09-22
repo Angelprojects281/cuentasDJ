@@ -114,6 +114,12 @@ body {
   max-width: 600px;
 }
 
+#detallesBaches {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
 .fila {
   display: flex;
   align-items: center;
