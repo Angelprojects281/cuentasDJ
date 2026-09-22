@@ -3,7 +3,7 @@
 function Footer() {
   return (
     <footer>
-      <p id="lema">(lema de la empresa)</p>
+      <p id="lema">Control y trazabilidad de la producción.</p>
     </footer>
   );
 }
