@@ -32,6 +32,9 @@ router.post("/cambiarcontrasena", cambiarcontrasena);
 // ruta verificar codigo cambio contrasena
 router.post("/verificarCodigo", verificarCodigoCambiocontrasena);
 
+// Todas las operaciones restantes requieren una sesión autenticada.
+router.use(verificarToken);
+
 //ruta crear nuevo usuario
 router.post("/crearUsuario", crearUsuario);
 
@@ -39,7 +42,7 @@ router.post("/crearUsuario", crearUsuario);
 router.get("/listarUsuarios", listarUsuarios);
 
 //ruta eliminar usuario
-router.delete("/usuario/:idUsuarios", verificarToken, eliminarUsuario);
+router.delete("/usuario/:idUsuarios", eliminarUsuario);
 
 //ruta crear registro
 router.post("/crearRegistro", CrearRegistro);

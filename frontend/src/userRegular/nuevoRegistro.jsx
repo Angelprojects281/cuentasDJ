@@ -8,6 +8,7 @@ import {
 } from "../reutilizables/componentes";
 
 import { mostrarAlerta, mostrarConfirmacion } from "../reutilizables/alertas";
+import { fetchAutenticado } from "../reutilizables/api";
 
 function NuevoRegistro() {
   const [turno, setturno] = useState("");
@@ -78,25 +79,28 @@ function NuevoRegistro() {
         return;
       }
 
-      const res = await fetch(`${import.meta.env.VITE_API}/crearRegistro`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await fetchAutenticado(
+        `${import.meta.env.VITE_API}/crearRegistro`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            turno,
+            fecha,
+            proveedorR,
+            loteR,
+            canecas20,
+            canecas60,
+            cdRecibidas,
+            caRecibidas,
+            cdEntregadas,
+            caEntregadas,
+            listaBaches,
+          }),
         },
-        body: JSON.stringify({
-          turno,
-          fecha,
-          proveedorR,
-          loteR,
-          canecas20,
-          canecas60,
-          cdRecibidas,
-          caRecibidas,
-          cdEntregadas,
-          caEntregadas,
-          listaBaches,
-        }),
-      });
+      );
 
       const data = await res.json();
 

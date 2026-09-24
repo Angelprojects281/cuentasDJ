@@ -8,6 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { mostrarAlerta } from "../reutilizables/alertas";
+import { fetchAutenticado } from "../reutilizables/api";
 
 // ver la lista de todos los ususarios y opciones para agregar y eliminar usuarios
 function AdminUsuarios() {
@@ -15,7 +16,9 @@ function AdminUsuarios() {
 
   const obtenerUsuarios = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API}/listarUsuarios`);
+      const res = await fetchAutenticado(
+        `${import.meta.env.VITE_API}/listarUsuarios`,
+      );
 
       const data = await res.json();
 

@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import zxcvbn from "zxcvbn";
 import { mostrarAlerta, mostrarConfirmacion } from "../reutilizables/alertas";
+import { fetchAutenticado } from "../reutilizables/api";
 
 //gestion para agregar usuarios
 function NuevoUsuario() {
@@ -58,17 +59,20 @@ function NuevoUsuario() {
         return;
       }
 
-      const res = await fetch(`${import.meta.env.VITE_API}/crearUsuario`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const res = await fetchAutenticado(
+        `${import.meta.env.VITE_API}/crearUsuario`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            idUsuarios,
+            cNueva,
+            Rol,
+          }),
         },
-        body: JSON.stringify({
-          idUsuarios,
-          cNueva,
-          Rol,
-        }),
-      });
+      );
 
       const data = await res.json();
 

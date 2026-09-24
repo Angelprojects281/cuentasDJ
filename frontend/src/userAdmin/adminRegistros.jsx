@@ -7,6 +7,7 @@ import {
 
 import { useState } from "react";
 import { mostrarAlerta, mostrarConfirmacion } from "../reutilizables/alertas";
+import { fetchAutenticado } from "../reutilizables/api";
 
 function formatearFechaProduccion(fecha) {
   return String(fecha).split(/[T ]/)[0];
@@ -44,7 +45,7 @@ function AdminRegistros() {
         );
         return;
       }
-      const res = await fetch(
+      const res = await fetchAutenticado(
         `${import.meta.env.VITE_API}/consultarRegistro?turno=${turno}&fecha=${fecha}`,
         {
           method: "GET",
@@ -99,7 +100,7 @@ function AdminRegistros() {
     }
 
     const idProduccion = produccion.idProduccion;
-    const res = await fetch(
+    const res = await fetchAutenticado(
       `${import.meta.env.VITE_API}/eliminarRegistro/${idProduccion}`,
       {
         method: "DELETE",

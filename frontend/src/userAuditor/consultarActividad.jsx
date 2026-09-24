@@ -5,6 +5,7 @@ import {
   Github,
 } from "../reutilizables/componentes";
 import { mostrarAlerta } from "../reutilizables/alertas";
+import { fetchAutenticado } from "../reutilizables/api";
 
 import { useState } from "react";
 
@@ -56,7 +57,7 @@ function ConsultarActividad() {
         return;
       }
 
-      const res = await fetch(
+      const res = await fetchAutenticado(
         `${import.meta.env.VITE_API}/consultarAuditoria?tipoActividad=${tipoActividad}&fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`,
         {
           method: "GET",
