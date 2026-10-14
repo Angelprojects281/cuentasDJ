@@ -39,12 +39,12 @@ El proyecto está separado en tres partes dentro del mismo repositorio:
 ## Arquitectura
 
 ```text
-Navegador (http://localhost:3000)
+Navegador (http://localhost:4000)
         |
         v
 Frontend React + Vite
         |
-        | VITE_API = http://localhost:4000/api
+        | VITE_API = http://localhost:3000/api
         v
 Backend Node.js + Express
         |
@@ -142,10 +142,10 @@ Modifica estos valores según tu instalación local. La aplicación utiliza una 
 Crea `frontend/.env` con:
 
 ```env
-VITE_API=http://localhost:4000/api
+VITE_API=http://localhost:3000/api
 ```
 
-Si cambias el puerto o la dirección del backend, actualiza esta variable. `frontend/vite.config.js` configura el servidor de desarrollo en el puerto `3000`.
+Si cambias el puerto o la dirección del backend, actualiza esta variable. `frontend/vite.config.js` configura el servidor de desarrollo en el puerto `4000`.
 
 ## Base de datos
 
@@ -175,7 +175,7 @@ cd backend
 node app.js
 ```
 
-API disponible en `http://localhost:4000`.
+API disponible en `http://localhost:3000`.
 
 Terminal 2, frontend:
 
@@ -184,7 +184,7 @@ cd frontend
 npm run dev
 ```
 
-Interfaz disponible en `http://localhost:3000`.
+Interfaz disponible en `http://localhost:4000`.
 
 Para generar y previsualizar una compilación de producción:
 
@@ -284,7 +284,7 @@ This repository contains the complete application in three parts:
 
 ## Architecture
 
-The browser loads the frontend from `http://localhost:3000`. The frontend sends requests to the backend through `VITE_API`, which defaults to `http://localhost:4000/api`. The backend uses `mysql2` to connect all features to the single MySQL database named `cuentasdj`.
+The browser loads the frontend from `http://localhost:4000`. The frontend sends requests to the backend through `VITE_API`, which defaults to `http://localhost:3000/api`. The backend uses `mysql2` to connect all features to the single MySQL database named `cuentasdj`.
 
 The database contains `usuarios`, `produccion`, `bache`, and `actividad_sistema`. Production and audit operations no longer use separate database connections; all controllers use the shared connection defined in `backend/config/db.js`.
 
@@ -365,10 +365,10 @@ Update them for your local MySQL installation.
 Create `frontend/.env`:
 
 ```env
-VITE_API=http://localhost:4000/api
+VITE_API=http://localhost:3000/api
 ```
 
-Update this value whenever the backend address or port changes. Vite serves the frontend on port `3000` by default.
+Update this value whenever the backend address or port changes. Vite serves the frontend on port `4000` by default.
 
 ## Database
 
@@ -391,7 +391,7 @@ cd backend
 node app.js
 ```
 
-The API will be available at `http://localhost:4000`.
+The API will be available at `http://localhost:3000`.
 
 Start the frontend in a second terminal:
 
@@ -400,7 +400,7 @@ cd frontend
 npm run dev
 ```
 
-The interface will be available at `http://localhost:3000`.
+The interface will be available at `http://localhost:4000`.
 
 To create and preview a production build:
 

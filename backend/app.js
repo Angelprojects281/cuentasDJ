@@ -8,7 +8,7 @@ const app = express();
 app.use(
   // Configuración de CORS para permitir solicitudes desde el frontend
   cors({
-    origin: ["http://localhost:3000", "https://cuentas-dj.vercel.app"], // URL del frontend (ajusta si es diferente)
+    origin: ["http://localhost:4000", "https://cuentas-dj.vercel.app"], // URL del frontend (ajusta si es diferente)
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   }),
@@ -26,6 +26,6 @@ app.get("/", (req, res) => {
 app.use("/api", authRoutes); // Rutas de autenticación bajo el prefijo /api
 
 // puerto
-const PORT = 4000;
+const PORT = 3000;
 
 app.listen(PORT);
